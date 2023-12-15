@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod2
+  labels: 
+    app: pod2_l
+  namespace: practise
+spec: 
+  containers: 
+    - name: app2
+      image: heartocean/utility:tomcat_sudo
+      ports:
+        - containerPort: 8080
+#      resources: 
+#        requests: 
+#          cpu: 300m
+ #         memory: 0.5Gi
+  #      limits:
+   #       cpu: 1
+    #      memory: 1Gi

@@ -1,0 +1,20 @@
+apiVersion: autoscaling/v2
+kind: HorizantalAutoScaling
+metadata:
+  name: hpa-1
+  namespace: ts
+spec:
+  scaleTargetRef:
+    apiVersion: v1
+    kind: Deployment
+    name: mav3
+  minReplicas: 4
+  maxReplicas: 7
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+      

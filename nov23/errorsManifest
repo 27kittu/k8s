@@ -1,0 +1,119 @@
+ubuntu@ip-172-31-95-202:~/mithun/manifest_files/new_exer_1$ kubectl describe pods pod2 -n ts
+Name:             pod2
+Namespace:        ts
+Priority:         0
+Service Account:  default
+Node:             ip-172-31-92-223/172.31.92.223
+Start Time:       Mon, 02 Oct 2023 13:25:33 +0000
+Labels:           app=tomcatp
+Annotations:      <none>
+Status:           Running
+IP:               10.32.0.2
+IPs:
+  IP:  10.32.0.2
+Containers:
+  tomcontainer:
+    Container ID:   containerd://11926c0b1349c60b2e4d7b18276ad1a29a8c4ca38c775043a941292b99453a2e
+    Image:          heartocean/k8s:22
+    Image ID:       docker.io/heartocean/k8s@sha256:267055434e6d84077625151b4c821d5a9e5e7d9f75c9778474f3e18e4fee8403
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Mon, 02 Oct 2023 13:25:35 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-rfdg2 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-rfdg2:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  35s   default-scheduler  Successfully assigned ts/pod2 to ip-172-31-92-223
+  Normal  Pulling    35s   kubelet            Pulling image "heartocean/k8s:22"
+  Normal  Pulled     34s   kubelet            Successfully pulled image "heartocean/k8s:22" in 1.282s (1.282s including waiting)
+  Normal  Created    34s   kubelet            Created container tomcontainer
+  Normal  Started    33s   kubelet            Started container tomcontainer
+
+
+
+------------
+Events:
+  Type     Reason            Age    From               Message
+  ----     ------            ----   ----               -------
+  Warning  FailedScheduling  4m52s  default-scheduler  0/1 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane: }. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling..
+
+- the above error is due to only one master node but has no child nodes in the cluster and due to taint in the 'master node', it stopeed creating the pod.
+
+-------------
+
+
+ubuntu@ip-172-31-95-202:~/mithun/manifest_files/new_exer_1$ kubectl describe svc tomserv -n ts
+Name:              tomserv
+Namespace:         ts
+Labels:            <none>
+Annotations:       <none>
+Selector:          name=pod2
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.104.73.234
+IPs:               10.104.73.234
+Port:              <unset>  80/TCP
+TargetPort:        8080/TCP
+Endpoints:         <none>
+Session Affinity:  None
+Events:            <none>
+
+- there is no endpoints, I have mistakenly written wrong selector
+---------------
+
+
+ubuntu@ip-172-31-95-202:~/mithun/manifest_files/new_exer_1$ kubectl apply -f serv_nodeport_1.yaml
+pod/t1 created
+The Service "tserv" is invalid: spec.ports[0].nodePort: Invalid value: 80: provided port is not in the valid range. The range of valid ports is 30000-32767
+
+
+- I have allotted 80, but the nodeport range is 30000-32767
+
+-----------
+
+If the pod is assigned with a 'ClusterIP' using a 'Service', it is to be checked in the node in which it was hosted.
+
+wasted much time checking in the master node as it was not known to check in the worker node in which it was hosted.
+----------
+
+
+ubuntu@ip-172-31-58-170:/var/lib/jenkins/workspace/k8s_pipe1$ sudo su jenkins
+jenkins@ip-172-31-58-170:~/workspace/k8s_pipe1$ kubectl
+Command 'kubectl' not found, but can be installed with:
+snap install kubectl
+Please ask your administrator.
+
+
+- You have to install 'docker' in jenkins server to use with 'jenkins'
+- add necessart permissions to '.kube' file and put it in 'jenkins home directory' "/var/lib/jenkins/'
+sudo chown jenkins:jenkins -R /var/lib/jenkins/.kube/
+
+- Install 'Kubectl' software to jenkins use it and make changes in the 'master node' of the k8s cluster.
+
+
+----------
+
+

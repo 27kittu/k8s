@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: chimpu
+  namespace: ts
+spec: 
+  stategy: Recreate
+  selector:
+    matchLabels:
+      app: trail1
+  replicas: 2
+  template:
+    metadata:
+      name: temptrail1
+      labels:
+        app: trail1
+    spec:
+      containers: 
+      - name: mavenappc
+        image: heartocean/k8s:6
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trail1serv
+  namespace: ts
+spec:
+  type: ClusterIP
+  selector:
+    app: trail1
+  ports:
+  - port: 80
+    targetPort: 8080
+
