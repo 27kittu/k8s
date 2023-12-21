@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nm1
+  namespace: ts
+data:
+  django_sec: "543535"
+  django_name: "alpha3"
+  cameo: | 
+    hello these are all to practise configmap is working 
+    this is very good ideal to practise
+  deloris: |
+    sirius
+    elnath
+    orion
+    canopus
+---
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: exp1
+  namespace: ts
+spec:
+  containers:
+    - name: exp1c
+      image: alpine
+      command: ["sleep", "3605"]
+      env:
+        - name: DJANGO_SEC
+          valueFrom:
+            configMapKeyRef:
+              name: nm1
+              key: django_sec
+        - name: DJANGO_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: nm1
+              key: django_name
+      volumeMounts:  
+        - name: conf
+          mountPath: "/config"
+          readOnly: true
+  volumes:
+    - name: conf
+      configMap: 
+        name: nm1
+        items:
+          - key: "cameo"
+            path: "cameo3"
+          - key: 'deloris'
+            path: 'del'

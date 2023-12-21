@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod1
+  namespace: ts
+spec:
+  containers: 
+    - name: pod1c
+      image: heartocean/docom:1
+      ports:
+        - name: pod1cport
+          containerPort: 8080
+      volumeMounts:
+        - mountPath: /tom/tomcat/conf
+          name: firsthp
+  volumes:
+    - name: firsthp
+      hostPath: 
+        path: /home/ansible/connect
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: serv1
+  namespace: ts
+spec:
+  type: ClusterIP
+  ports:
+    - name: tomport
+      protocol: TCP
+      port: 80
+      targetPort: 8080

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata: 
+  name: sec1
+  namespace: ts
+type: Opaque
+stringData:
+  mongo_pass: kittu4

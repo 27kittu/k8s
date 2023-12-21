@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: tompod1
+  namespace: ts
+  labels:
+    app: mavenApp
+spec:
+  containers:
+  - name: appc
+    image: heartocean/k8s:18
+    ports:
+    - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: tomserv
+  namespace: ts
+spec:
+  type: ClusterIP 
+  selector: 
+    app: mavenApp
+  ports: 
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

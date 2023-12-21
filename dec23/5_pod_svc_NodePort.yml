@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: cam1
+  namespace: ts
+  labels:
+    name: campod
+spec: 
+  containers:
+    - name: camcon
+      image: heartocean/docom:1
+      ports:
+        - name: tomport
+          containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: camser
+  namespace: ts
+spec:
+  type: NodePort
+  selector:
+    name: campod
+  ports:
+    - name: camconport
+      protocol: TCP
+      port: 80
+      targetPort: tomport
+      nodePort: 30000

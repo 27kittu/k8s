@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: exerconfig
+  namespace: ts
+data:
+  
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ramco
+  namespece: ts
+spec:
+  containers:
+    - name: ramcoc
+      image: alpine
+      port: 8000
+---

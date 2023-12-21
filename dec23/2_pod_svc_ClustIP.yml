@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mvnpod
+  namespace: ts
+  labels:
+    name: mvnpod
+spec:
+  containers:
+    - name: tompod
+      image: heartocean/docom:1
+      ports:
+        - name: tomport
+          containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mvnserv1
+  namespace: ts
+spec:
+  selector:
+    name: mvnpod
+  ports:
+    - name: mvn-tom
+      protocol: TCP
+      port: 80
+      targetPort: tomport
+    
+
