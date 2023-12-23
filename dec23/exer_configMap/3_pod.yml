@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod4
+  namespace: ts
+spec:
+  containers:
+    - name: pod4c
+      image: heartocean/docom:2
+      ports:
+        - containerPort: 8080
+          name: tomport4
+      env:
+        - name: MONGO_DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: cm4
+              key: mongo_db_username
+        - name: MONGO_DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: cm4
+              key: mongo_db_password
+
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  name: s4
+  namespace: ts
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: tomport4
+
