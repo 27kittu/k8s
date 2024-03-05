@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod5
+  namespace: ts
+spec:
+  containers:
+    - name: pod5c
+      image: alpine:latest
+      command: ['sleep', '3300']
+      env:
+        - name: MONGO_DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: cm4
+              key: mongo_db_username
+        - name: MONGO_DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: cm4
+              key: mongo_db_password
+
