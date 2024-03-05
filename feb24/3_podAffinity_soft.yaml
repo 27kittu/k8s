@@ -1,0 +1,37 @@
+apiVersion:
+kind: Deployment
+metadata: 
+  name: springd
+  namespace: ts
+spec:
+  type: Recreate
+  replicas: 3
+  selector:
+    app: javapp
+  template:
+    metadata:
+      labels: 
+        app: javapp
+    spec:
+      containers:
+        - name: springa
+          image: heartocean/docom:1
+          ports: 
+            - name: tport
+              containerPort: 8080
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            preference:
+              - weight: 7
+                matchExpressions:
+                  key: name
+                  operator: In
+                  values:
+                    - first
+                    - third
+      volumeMounts:
+        - name: 
+---
+apiVersion:
+

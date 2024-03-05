@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springdep
+  namespace: ts
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: spring
+  template:
+    metadata:
+      labels: 
+        app: spring
+    spec:
+      containers:
+        - name: springapp
+          image: heartocean/docom:1
+          ports:
+            - name: tomport
+              containerPort: 8080
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 7
+              preference:
+                matchExpressions:
+                  - key: name
+                    operator: In
+                    values: 
+                      - first
+            - weight: 8
+              preference:
+                matchExpressions:
+                  - key: name
+                    operator: In
+                    values: 
+                      - second
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springreach
+  namespace: ts
+spec:
+  type: NodePort
+  selector:
+    app: spring
+  ports: 
+    - port: 80
+      targetPort: tomport
+      nodePort: 30001

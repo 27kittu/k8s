@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-1
+  namespace: ts
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: spring-app1
+  template: 
+    metadata: 
+      labels:
+        app: spring-app1
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 5
+              preference:
+                matchExpressions:
+                  - key: name
+                    operator: In
+                    values: 
+                      - first
+                      - second            
+      containers:
+        - name: tomc
+          image: heartocean/docom:1
+          ports:
+            - name: tomcp
+              containerPort: 8080
+          livenessProbe:
+            exec:
+              command:
+                - wget
+                - http://localhost:8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - wget 
+                - http://localhost:8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: serv1
+  namespace: ts
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP 
+      port: 80
+      targetPort: tomcp
+      nodePort: 30003
+  selector:
+    app: spring-app1
