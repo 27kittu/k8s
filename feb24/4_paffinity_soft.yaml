@@ -43,10 +43,10 @@ metadata:
   name: springreach
   namespace: ts
 spec:
-  type: NodePort
+  type: NodePort 
   selector:
     app: spring
   ports: 
     - port: 80
       targetPort: tomport
-      nodePort: 30001
+      nodePort: 30004

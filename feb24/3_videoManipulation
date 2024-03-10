@@ -1,0 +1,18 @@
+- To display all details of the video, 
+ffmpeg -i <video>
+
+
+- To cut a video from one time stamp to another
+
+ffmpeg -ss 00:00:10.00 -i "in.mp4" -t 00:00:15.00 -c copy out.mp4
+
+
+00:00:10.00 -i  -t 00:00:15.00	- seconds
+
+The -ss parameter in this position states to discard all input up until 15 seconds into the video. The -t option states to
+   capture for 10 seconds. The rest of the command tells it to store as an mp4
+
+- To convert the video from one 
+
+ffmpeg -i input.a- To display all details of the video, 
+ffmpeg -i <video> -s 720x480 -c:a copy output.mkv

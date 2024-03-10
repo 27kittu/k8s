@@ -2,14 +2,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata: 
   name: ingress1
+  namespace: ts
 spec:
+  ingressClassName: nginx-ingress
   rules:
-    - http:
-      paths:
-        - path: /
-          pathType: prefix
-          backend:
-            service:
-              name: sserv
-              port:
-                number: 80
+    - host: aa8f2832da6ff4b4fa0522eca976edf0-a1d18bc89734ed9e.elb.ap-south-1.amazonaws.com 
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: springreach
+                port:
+                  number: 80
