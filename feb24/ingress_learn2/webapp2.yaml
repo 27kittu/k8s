@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: learn2dep
+  namespace: ts
+spec:
+  strategy: 
+    type: RollingUpdate
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: app2temp
+  template:
+    metadata:
+      labels:
+        app: app2temp
+    spec: 
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 7
+              preference:
+                matchExpressions:
+                  - key: name
+                    operator: In
+                    values:
+                      - first
+                      - computeOptimised
+      containers:
+        - name: app2c
+          image: heartocean/docom:kj11
+          ports:
+            - containerPort: 8080
+              name: app2cport
+          livenessProbe:
+            exec:
+              command:  
+                - curl
+                - http://localhost:8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
