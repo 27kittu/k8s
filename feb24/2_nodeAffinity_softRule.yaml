@@ -36,7 +36,7 @@ metadata:
   name: springserv
   namespace: ts
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: spring
   ports:
