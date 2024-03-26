@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: app1d
+  namespace: ts
+spec:
+  metadata: 
+    selector:
+      app: app1
+  spec:
+    containers:
+      - name: app1c
+        image: heartocean/docom:kj20
+        ports:
+          - name: tomport
+            containerPort: 8080
+        
+      

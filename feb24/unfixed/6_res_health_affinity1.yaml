@@ -26,7 +26,7 @@ spec:
                       - second            
       containers:
         - name: tomc
-          image: heartocean/docom:1
+          image: heartocean/docom:kj15
           ports:
             - name: tomcp
               containerPort: 8080

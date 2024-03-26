@@ -1,18 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: learn1ingress
+  name: app1ingress
   namespace: ts
 spec:
   ingressClassName: nginx
   rules:
-    - host: "a7d599c5d2d904d93822a1a7760190fd-a409078e7f97bd82.elb.ap-south-1.amazonaws.com"
+    - host: "af47e5bc009d541658a7f6debb1efd87-1509577740.ap-south-1.elb.amazonaws.com"
       http:
-        paths:  
-         - path: "/"
-           pathType: Prefix
-           backend: 
-             service: 
-               name: ingress-example1
-               port:
-                 number: 80
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend: 
+              service: 
+                name: app1serv
+                port:
+                  number: 80
+          - path: '/maven-web-app'
+            pathType: Prefix
+            backend:
+              service:
+                name: app1serv
+                port:
+                  number: 80
+        
