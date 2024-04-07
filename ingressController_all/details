@@ -1,0 +1,4 @@
+- First, install all the files in this dir
+- now, install CRDs from the ingress controller website
+
+kubectl apply -f https://raw.githubusercontent.com/nginxinc/kubernetes-ingress/v3.3.2/deploy/crds.yaml
