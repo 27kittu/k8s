@@ -1,0 +1,8 @@
+apiVersion: v1      
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc1
+  namespace: ts
+spec:
+  storageClassName: ''
+  volumeName: pers-vol-1 
