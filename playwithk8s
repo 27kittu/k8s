@@ -1,0 +1,11 @@
+kubeadm init --apiserver-advertise-address $(hostname -i) --pod-network-cidr 10.5.0.0/16
+
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+
+kubeadm join 192.168.0.18:6443 --token 075hg5.ywr4gr7glv5jjglg \
+    --discovery-token-ca-cert-hash sha256:4db9943f58f1df5da3f16ff758eb41ab83a5329203583af46912fd8a56376774
