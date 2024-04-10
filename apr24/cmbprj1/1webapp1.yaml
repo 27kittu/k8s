@@ -20,6 +20,7 @@ spec:
           image: heartocean/docom:kj11
           ports: 
             - containerPort: 8080
+              name: tomp
           volumeMounts:
             - name: vol-1
               mountPath: /tmp

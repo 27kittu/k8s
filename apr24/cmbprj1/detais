@@ -1,0 +1,2 @@
+- make sure to create '/mnt/disk1' in the scheduling nodes for the volumes to be attached
+
