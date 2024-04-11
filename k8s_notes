@@ -19,6 +19,18 @@ CSI plugins:
 - 
 
 ConfigMap:
--------------
+----------
 - ConfigMap is used to reference data in to pods as a 'configMap' type as a volume
 
+emptyDir:
+---------
+- EmptyDir is a common volume that is shared among the containers in a pod. 
+- This volume is created when the pod is assigned to a node
+- This volume is deleted if the pod is removed from the node
+- Container crashed does not remove the emptydir
+- we can control emptyDir size by attributing(sizeLimit: 500Mi)
+
+hostPath:
+---------
+- A hostpath volume mounts a file or directory from the host's filesystem
+-
