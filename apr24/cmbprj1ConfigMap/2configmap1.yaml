@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm1
+  namespace: ts
+data:
+  ansible.cfg: |
+    inventory=/etc/ansible/hosts
+    ansible_root=/home/ansible
+    ansible_playbooks=/home/ansible

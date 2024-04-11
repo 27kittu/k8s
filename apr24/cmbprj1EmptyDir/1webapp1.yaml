@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dockerdep
+  namespace: ts
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: spring
+  template:
+    metadata:
+      labels: 
+        app: spring
+    spec:
+      containers:
+        - name: app1
+          image: heartocean/docom:kj11
+          ports: 
+            - containerPort: 8080
+              name: tomp
+          volumeMounts:
+            - name: cache1
+              mountPath: /tmp
+      volumes:
+        - name: cache1
+          emptyDir: 
+            sizeLimit: 100Mi
