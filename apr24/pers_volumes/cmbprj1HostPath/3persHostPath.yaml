@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+  name: hp-pv1 #hp-pv2
+  namespace: ts
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+  accessModes: 
+    - ReadWriteMany
+  hostPath:
+    path: /opt/disk1
