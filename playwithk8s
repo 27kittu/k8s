@@ -1,5 +1,15 @@
 yum-config-manager --save --setopt=kubernetes.skip_if_unavailable=true
 yum install -y vim 
+
+cat > $HOME/.vimrc<<eof
+syntax enable
+colorscheme ron
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType groovy setlocal ts=2 sts=2 sw=2 expandtab
+eof
+
+. $HOME/.vimrc
+
 kubeadm init --apiserver-advertise-address $(hostname -i) --pod-network-cidr 10.5.0.0/16
 
 mkdir -p $HOME/.kube
@@ -12,12 +22,3 @@ kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/we
 # ctrl+insert - copy
 #kubeadm join 192.168.0.18:6443 --token 075hg5.ywr4gr7glv5jjglg \
     --discovery-token-ca-cert-hash sha256:4db9943f58f1df5da3f16ff758eb41ab83a5329203583af46912fd8a56376774
-
-cat > $HOME/.vimrc<<eof
-syntax enable
-colorscheme ron
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType groovy setlocal ts=2 sts=2 sw=2 expandtab
-eof
-
-. $HOME/.vimrc
