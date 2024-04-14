@@ -20,9 +20,9 @@ spec:
             - containerPort: 8080
               name: tomp
           volumeMounts:
-            - name: cache1
-              mountPath: /tmp
+            - name: nfs-vol1
+              mountPath: /tom
       volumes:
-        - name: cache1
-          emptyDir: 
-            sizeLimit: 100Mi
+        - name: nfs-vol1
+          persistentVolumeClaim: 
+            claimName: nfs-pvc1 
