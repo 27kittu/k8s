@@ -4,9 +4,10 @@ metadata:
   name: serv1
   namespace: ts
 spec:
-  type: ClusterIP
+  type: NodePort
   selector: 
     app: spring
   ports:
     - port: 80
       targetPort: tomp
+      nodePort: 30000
