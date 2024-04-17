@@ -35,4 +35,10 @@ emptyDir:
 hostPath:
 ---------
 - A hostpath volume mounts a file or directory from the host's filesystem
--
+
+
+NFS:
+----
+- In order to installuse the NFS volumes, we have to install packages in both the NFS host  and client(k8s) servers
+- In NFS host, we have to install 'nfs-kernel-server' and in client(k8s) server, install 'nfs-common' package
+- to use with the pods to use the storages

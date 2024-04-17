@@ -1,0 +1,23 @@
+Hostpath vs local volume
+-----------------------------
+With HostPath volumes, a pod referencing a HostPath volume may be moved by the scheduler to a different node resulting in data loss. But with Local Persistent Volumes, the Kubernetes scheduler ensures that a pod using a Local Persistent Volume is always scheduled to the same node
+=================
+
+kubeadm init
+
+kubeadm init --control-plane-endpoint "PUBLIC_IP:PORT"
+
+Exit as root and swith to normal user
+----------------
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+-==============================================================
+ERRORS:-
+--------------
+- NFS volume mounting failed in Kubernetes environmen
+
+https://github.com/rancher/rancher/issues/4423
+-----------------------------------------------
+
