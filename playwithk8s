@@ -1,5 +1,7 @@
 yum-config-manager --save --setopt=kubernetes.skip_if_unavailable=true
-yum install -y vim 
+yum install -y vim net-tools openssh-server initscripts
+systemctl start sshd
+echo 'ubuntu'  | passwd root --stdin
 
 cat > $HOME/.vimrc<<eof
 syntax enable
