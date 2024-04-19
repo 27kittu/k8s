@@ -4,6 +4,7 @@ metadata:
   name: pvc1
   namespace: ts
 spec:
+  storageClassName: sc1
   accessModes:
     - ReadWriteMany
   resources:
