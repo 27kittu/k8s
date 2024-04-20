@@ -1,0 +1,183 @@
+===========================================
+Ansible
+--------
+
+#!/bin/bash
+yum update -y
+yum install -y vim zip tar wget git net-tools curl
+
+#changing vim default colorscheme
+cat > /etc/vim/vimrc <<eof
+syntax enable
+colorscheme ron
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+eof
+
+# configuring ansible
+user="ansible"
+pass="ec2@redhat"
+useradd -m -U $user
+echo "$pass" | passwd --stdin "$user"
+
+# adding visudo file'
+cp /etc/sudoers /etc/sudoers_copy
+sed -i 's/root\s*ALL=(ALL)\s*ALL/root    ALL=(ALL)       ALL\nansible ALL=(ALL)       NOPASSWD: ALL/' /etc/sudoers
+
+# changing Password authentication
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+
+# restart sshd service
+systemctl restart sshd
+
+
+==================================
+Ansible Master server
+
+#!/bin/bash
+yum update -y
+yum install -y vim zip tar wget git net-tools curl
+yum install -y ansible-core
+
+#changing vim default colorscheme
+cat > /etc/vim/vimrc <<eof
+syntax enable
+colorscheme ron
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+eof
+
+# configuring ansible
+user="ansible"
+pass="ec2@redhat"
+useradd -m -U $user
+echo "$pass" | passwd --stdin "$user"
+
+# adding visudo file'
+cp /etc/sudoers /etc/sudoers_copy
+sed -i 's/root\s*ALL=(ALL)\s*ALL/root    ALL=(ALL)       ALL\nansible ALL=(ALL)       NOPASSWD: ALL/' /etc/sudoers
+
+# changing Password authentication
+cat /etc/ssh/sshd_config | sed 's/#PasswordAuthentication yes/PasswordAuthentication yes/'>> 
+
+# restart sshd service
+systemctl restart sshd
+==================================
+
+
+
+user="ansible"
+pass="ec2@redhat"
+useradd -m -U $user
+echo "$pass" | passwd --stdin "$user"
+----------------------------------
+-m      create home directory
+-U      create group similar username
+--stdin read password from stdin from pipe
+==================================
+
+
+# adding visudo file
+
+
+
+
+==================================
+
+REFERENCE SNIPPETS:
+--------------------
+root    ALL=(ALL)       ALL
+ansible ALL=(ALL)       NOPASSWD: ALL
+
+
+==================================
+
+
+
+
+
+
+
+
+to see the details of the user-data for aws instances in directory
+/var/lib/cloud/instances/instance-id/
+
+the log files will be at
+/var/log/cloud-init-output.log.
+
+
+passwd ansible
+
+
+
+
+
+JAVA INSTALLATION
+
+
+for Nexus:
+java 8 /jdk
+
+--------------------------
+#Login as a root user
+sudo su -
+
+
+#Install JRE 1.8
+yum install java-1.8.0-openjdk -y
+java -version 
+#Install JDK 1.8 
+yum install java-1.8.0-openjdk-devel -y
+
+javac -version 
+#Install JRE 11  
+yum install java-11-openjdk -y
+java -version 
+#Install JDK 11
+yum install java-11-openjdk-devel -y
+javac -version  
+
+
+
+
+
+
+By default, Ubuntu 18.04 includes OpenJDK version 11,which is an open-source variant of the JRE and JDK.
+
+To install this version, first update the package index with below command.
+
+#sudo apt update
+
+Then execute below commands based on which version you want to install.
+
+#apt install default-jre : For Default version.
+#apt install openjdk-11-jre-headless : For Java 11
+#apt install openjdk-8-jre-headless : For Java 8
+
+Verify the Java installation with below command.
+#java -version
+
+To install the JDK, execute the following command, which will also install the JRE.
+
+#sudo apt install default-jdk
+
+Verify that the JDK is installed by checking the version of javac, the Java compiler using below command.
+
+#javac -version
+
+
+To Install the Open JDK 8, use the below command.
+
+#sudo apt install openjdk-8-jdk
+
+
+
+
+snippets:
+=============
+root    ALL=(ALL)       ALL\nansible ALL=(ALL)       NOPASSWD: ALL
+#cat /etc/ssh/sshd_config | sed 's/#PassworAuthentication no/PassworAuthentication yes/'>> 
+
+cat >> /etc/ssh/sshd_config<<eofi
+PasswordAuthentication yes
+eofi
+
+
