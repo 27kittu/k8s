@@ -4,9 +4,10 @@ metadata:
   name: nfs-pvc1
   namespace: ts
 spec:
-  storageClassName: sc1
+  #storageClassName: ''
   resources: 
     requests: 
       storage: 1Gi
   accessModes:
     - ReadWriteMany
+  persistencVolumeReclaimPolicy: delete

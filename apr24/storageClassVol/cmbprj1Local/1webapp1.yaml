@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp1dep 
+  namespace: ts
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: spring
+  template:
+    metadata:
+      labels: 
+        app: spring
+    spec:
+      containers:
+        - name: app1
+          image: heartocean/docom:jwad0
+          ports: 
+            - containerPort: 8080
+              name: tomp
+          env:
+            - name: MONGO_DB_USERNAME
+              value: muser
+            - name: MONGO_DB_PASSWORD
+              value: mongopass
+            - name: MONGO_DB_HOSTNAME
+              value: db1
+          volumeMounts:
+            - name: nfs-vol1
+              mountPath: /tmp
+        - name: db1
+          image: mongo
+          ports:
+            - name: mongop
+              containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: muser
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: mongopass
+      volumes:
+        - name: nfs-vol1
+          persistentVolumeClaim: 
+            claimName: nfs-pvc1 
