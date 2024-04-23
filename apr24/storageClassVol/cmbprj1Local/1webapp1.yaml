@@ -26,9 +26,6 @@ spec:
               value: mongopass
             - name: MONGO_DB_HOSTNAME
               value: db1
-          volumeMounts:
-            - name: nfs-vol1
-              mountPath: /tmp
         - name: db1
           image: mongo
           ports:
@@ -39,7 +36,10 @@ spec:
               value: muser
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: mongopass
+          volumeMounts:
+            - name: local-vol1
+              mountPath: /data/db
       volumes:
-        - name: nfs-vol1
+        - name: local-vol1
           persistentVolumeClaim: 
-            claimName: nfs-pvc1 
+            claimName: local-pvc1 
