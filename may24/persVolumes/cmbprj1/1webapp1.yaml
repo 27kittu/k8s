@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mayapp1d
+  namespace: ts
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mayapp1
+  template:  
+    metadata: 
+      labels:
+        app: mayapp1
+    spec:
+      containers:
+        - name: mayapp1c
+          image: heartocean/docom:jwad0
+          ports:
+            - name: tompc
+              containerPort: 8080
+        - name: maymonog1
+          image: mongo
+          ports:
+            - containerPort: 27017
