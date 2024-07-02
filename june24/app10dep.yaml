@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app10dep
+  namespace: ts
+spec:
+  replicas: 3
+  type: 
+    strategy: Rollout
+  selector:
+    matchLabels:
+      app: app10
+  template:
+    metadata:
+      labels:
+        app: app10
+    spec:
+      containers:
+        - name: tomcapp10
+          image: heartocean/docom:kj11
+          
+
