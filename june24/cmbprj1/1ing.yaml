@@ -4,4 +4,15 @@ metadata:
   name: app10ing
   namespace: ts
 spec: 
-  
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths: 
+          - path: /app10
+            pathType: Prefix
+            backend:
+              service: 
+                name: app10serv
+                port: 
+                  number: 80
+                
