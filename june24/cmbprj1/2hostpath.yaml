@@ -3,12 +3,12 @@ kind: PersistentVolume
 metadata: 
   name: hp1
 spec:
-  volumeMode: filesystem
+  volumeMode: Filesystem
   capacity:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  hostpath:
+  hostPath:
     path: /space
     type: DirectoryOrCreate
     

@@ -21,19 +21,25 @@ spec:
           ports:
             - containerPort: 8080
               name: tomcp
-          environment:
-            - MONGODB_ROOT_USERNAME=
-            - MONGODB_ROOT_PASSWORD=
-            - MONGODB_ROOT_HOSTNAME=mongoc
+          env:
+            - name: MONGODB_ROOT_USERNAME
+              value: mongo
+            - name: MONGODB_ROOT_PASSWORD
+              value: mongopass
+            - name: MONGODB_ROOT_HOSTNAME
+              value: mongoc
         - name: mongoc
           image: mongo
           ports: 
             - containerPort: 27017
               name: mongocp
-          environment:
-           - MONGO_INITDB_ROOT_USERNAME: 
-           - MONGO_INITDB_ROOT_PASSWORD: 
-          volumeMounts:
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: mongo
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: mongopass
+        volumeMounts:
+          - n
 ---
 apiVersion: v1
 kind: Service
