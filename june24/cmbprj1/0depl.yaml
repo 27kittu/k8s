@@ -38,8 +38,13 @@ spec:
               value: mongo
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: mongopass
-        volumeMounts:
-          - n
+          volumeMounts:
+            - name: vol1
+              mountPath: /data/db 
+      volumes:
+        - name: vol1
+          persistentVolumeClaim:
+            claimName: pvc1
 ---
 apiVersion: v1
 kind: Service
