@@ -13,7 +13,8 @@ spec:
     type: Recreate
   replicas: 2
   selector:
-    app: demo-app1
+    matchLabels:
+      app: demo-app1
   template:
     metadata:
       labels:
@@ -32,9 +33,20 @@ spec:
           ports: 
             - containerPort: 8080
               name: tomcp
+        - name: mongoc
+          image: mongo
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: mongo
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: mongopass
           volumeMounts:
             - name: vol1
               mountPath: /data/db
+      volumes:
+        - name: vol1
+          persistentVolumeClaim:
+            claimName: pvclaim0 
 --- 
 apiVersion: v1
 kind: Service

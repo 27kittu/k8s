@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 1Gi
   volumeMode: Filesystem #Block
-  accessmodes:
+  accessModes:
     - ReadWriteOnce #ReadOnlyMany, ReadWriteMany, ReadWriteOncePod
   persistentVolumeReclaimPolicy: Retain #Recycle, Delete
   hostPath:

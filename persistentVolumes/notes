@@ -1,6 +1,5 @@
-Persistent Volumes:
+Persistent Volumes: exists deyond the podlifecycle
 ------------------
-
 - Persistent Volumes must specifically mention 'StorageClassName' in its 'Spec' otherwise default storage class will be set
 
 local:
