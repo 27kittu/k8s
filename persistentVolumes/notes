@@ -1,0 +1,9 @@
+Persistent Volumes:
+------------------
+
+- Persistent Volumes must specifically mention 'StorageClassName' in its 'Spec' otherwise default storage class will be set
+
+local:
+-------
+- For local Volumes, we have to set 'nodeAffinity' to schedule those pods to correct node where 'local' volumes are located
+
