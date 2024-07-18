@@ -1,5 +1,16 @@
+Liveness,Readiness and Startup Probes:
+--------------------------------------
+Probes below are the directives to the containers 
+
+Liveness Probe: is to check the 'livelines' of the container and restart the containers if not starting as expected.
+
+Readiness Probe: this checks all the time and tells about when the container accepts traffic. If readiness probe returns a failed state, k8s will removes the pod until it is repaired.
+
+Startup Probe: this probe verifies whether the application in the container is started.
+
+----------------------------------------- 
 K8s Storage:
----------------
+------------
 Volumes:
 --------
 - Pods use storages are ephemeral means storage lasts for only till pod lasts.
