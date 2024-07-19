@@ -6,22 +6,24 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: app10
+      app: app11
   template:
     metadata:
       labels:
-        app: app10
+        app: app11
     spec:
       affinity:
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
-              matchExpressions:
-                - key: name
-                  operator: In
-                  values:
-                    - first
-                    - one
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - demo-app1
+                      - app10
+                      - app10dep
+              #topologyKey: 
       containers:
         - name: tomc
           image: heartocean/docom:kj11
