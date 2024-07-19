@@ -13,5 +13,5 @@ spec:
   selector:
     matchLabels:
       handle: pv-hp1
-  #storageClassName: ''# inorder to provide storage for this pvc on demand if specified
+  storageClassName: ''# inorder to provide storage for this pvc on demand if specified
   #volumeName: hp1# Volume name can be directly provided to attach that volume to this pvc deliberately
