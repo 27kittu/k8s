@@ -13,15 +13,15 @@ spec:
         app: app10
     spec:
       affinity:
-        nodeAffinity:
+        podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: name
-                    operator: In
-                    values:
-                      - first
-                      - one
+            - labelSelector:
+              matchExpressions:
+                - key: name
+                  operator: In
+                  values:
+                    - first
+                    - one
       containers:
         - name: tomc
           image: heartocean/docom:kj11
