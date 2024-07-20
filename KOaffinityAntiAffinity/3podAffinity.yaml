@@ -20,9 +20,11 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - demo-app1
                       - app10
-                      - app10dep
+                  - key: namespace
+                    operator: In
+                    values:
+                      - ts
               topologyKey: nodeName
       containers:
         - name: tomc
