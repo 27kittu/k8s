@@ -1,0 +1,24 @@
+- k8s Introduction and k8s architecture
+- k8s services(ClusteIP, NodePort, External Name), FQDN [few left]
+- Check service reach in same namespace vs different namespace
+- Static Pods [Done]
+- Replication Controller [Done]
+- Replica Set [Done]
+- DaemonSet 
+- Deployments and Deployment different sub Strategies and Reviews
+- Resource Requests and Resource Limits
+- Resource Quotas
+- Metrics Server & Horizantal Pod Autoscalar
+- Liveness, Readiness and Startup Probes [few left]
+- Volumes(emptyDir,hostpath,NFS volumes), Persistent volumes
+- Persistent Volumes(reclaim policies), Storage Classes
+- Config Maps and Secrets
+- Health Checks
+- Stateful Sets
+- Scheduling Pods in Nodes(Node Affinity,Pod Affinity & Pod Anti-affinity)[few left]
+- Network Policies
+- EKS and EKS Cluster Autoscaling
+- Ingress Controller
+- Role Based Access Control(RBAC)
+- Helm
+- Monitoring using Prometheus and Dashboards using Grafana
