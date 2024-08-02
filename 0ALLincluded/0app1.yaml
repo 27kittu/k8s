@@ -38,6 +38,13 @@ spec:
             value: mongopass
           - name: MONGODB_ROOT_HOSTNAME
             value: mongoc
+        livenessProbe:
+          exec:
+            command:
+              - curl
+              - http://localhost:8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
       - name: mongoc
         image: mongo
         ports: 
@@ -47,10 +54,17 @@ spec:
             value: mongouser
           - name: MONGO_INITDB_ROOT_PASSWORD
             value: mongopass
+        livenessProbe: 
+          exec:
+            command:
+              - touch 
+              - /space2
+          initialDelaySeconds: 5
+          periodSeconds: 5
         volumeMounts:
           - name: all-vol1
             mountPath: /data/db
-  volumes:
-    - name: all-vol1
-      persistentVolumeClaim:
-        claimName: all-pvc1
+    volumes:
+      - name: all-vol1
+        persistentVolumeClaim:
+          claimName: all-pvc1
