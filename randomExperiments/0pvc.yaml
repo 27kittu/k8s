@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvclaim1
+  namespace: ts
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem #Block
+  accessModes:
+    - ReadWriteOnce #ReadOnlyMany,ReadWriteMany,ReadWriteOncePod
+  storageClassName: sc1 # inorder to provide storage for this pvc on demand if specified
+  #volumeName: hp1# Volume name can be directly provided to attach that volume to this pvc deliberately

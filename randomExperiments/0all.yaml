@@ -46,7 +46,7 @@ spec:
       volumes:
         - name: vol1
           persistentVolumeClaim:
-            claimName: pvclaim0 
+            claimName: pvclaim1 
 --- 
 apiVersion: v1
 kind: Service
