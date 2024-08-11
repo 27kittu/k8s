@@ -1,0 +1,8 @@
+. git_configure
+
+#curl -skSL https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/v4.8.0/deploy/install-driver.sh | bash -s v4.8.0 -- #NFS CSI driver v4.8.0
+#kubectl -n kube-system get pod -o wide -l app=csi-nfs-controller
+#kubectl -n kube-system get pod -o wide -l app=csi-nfs-node
+
+ssh root@172.30.2.2 'mkdir /mnt/nfsvol && chown nobody:nogroup -R /mnt/nfsvol && chmod 755 -R /mnt/nfsvol'
+kubectl apply -f randomExperiments/0all.yaml -f randomExperiments/0pvc.yaml -f 0KOStorageClass/0sc1.yaml

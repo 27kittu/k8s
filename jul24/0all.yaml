@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-dep
+  namespace: ts
+spec:
+  replicas: 3
+  strategy: 
+    type: RollingUpdate
+  selector: 
+    matchLabels: 
+      app: sampleapp1
+  template: 
+    metadata: 
+      labels:
+        app: sampleapp1
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                 - key: name
+                   operator: In
+                   values:
+                     - first
+                     - one
+      containers:
+        - name: tomc
+          image: heartocean/docom:kj11
+          ports:
+            - containerPort: 8080
+              name: tomcp
+          env:
+            - key: MONGODB_ROOT_USERNAME: 
+              value: 
+            - key: MONGODB_ROOT_PASSWORD:
+              value:
+            - key: MONGODB_ROOT__HOSTNAME:
+              value: mongoc
+          #volumeMounts:
+          #readinessProbe:
+          #startupProbe:
+          #livenessProbe:
+          #resources:
+            
+        - name: mongoc
+          image: mongo
+          ports: 
+            - containerPort: 27017
+          env:
+            - key: MONGODB_INITDB_ROOT_USERNAME:
+              value: 
+            - key: MONGO_INITDB_ROOT_PASSWORD:
+              value:
+          #volumeMounts:
+          #livenessProbe:
+          #readinessProbe:
+          #startupProbe:
+          #resources:
+      #Volumes:
