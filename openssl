@@ -13,11 +13,17 @@ Installation:
                               
 pillars of Cryptography:     
 - integrity: using 'sha1sum' tool, data can be checked if it is modified or not
-- confidentiality:              
+- confidentiality: secret keys       
 - authentication                
 - authorization                 
 - non-repetition            
-                           
+
+There are two types of encryptions
+Symmetric encryption
+Asymmetric encryption
+
+Symmetric encryption: Here only one key used for encryption and decryption.
+Asymmetric encryption: There are two keys. one is a 'Public key' which is used for encrypting data and a 'Private key' is used for decrypting data. But, we can generate 'n' number of private keys inorder to decrypt data for many users with only one public key fixed.
 Usage:                    
 ---------                
 - To know all the options in 'openssl version'
@@ -31,3 +37,34 @@ openssl help
 - To create 'sha256' of any file, first create any file 
 
 openssl sha256 -hex -out file.sha256 file
+
+
+Generatin symmetric/secret keys:
+----------------------
+- To generate secret/symmetric keys
+openssl rand -hex 10
+
+hex - hex format
+10 - 10 bytes of randomly generated data
+
+
+- To ouput data to a file
+
+openssl rand -hex -out enkrypt.key 32
+
+32 - size of data
+out - output to a file
+
+the key generated can be used for any encrypting of data
+
+- To open an rsa asymmetric/private key
+
+openssl genrsa 
+
+- To mention key size
+
+openssl genrsa 2048
+
+- To create output file
+
+openssl genrsa -out key.pri 2048
