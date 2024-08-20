@@ -1,0 +1,33 @@
+Openssl: cryptographic utility                                          
+----------------------------- 
+- Generate certificates, hashes                                                           
+- Encrype documents and files  
+                               
+Installation:
+---------------    
+- Goto 'openssl.org' website and download new version using 'wget'    
+- unpack using 'tar -xvzf <file> -C <spec_DIR>'      
+- run file './config'. It configures OS and creates 'makefile'      
+- Run 'make' file (runs each file at-a-time) or using 'make -j' inorder to use all the cores  
+- Run 'sudo make install' to install  
+                              
+pillars of Cryptography:     
+- integrity: using 'sha1sum' tool, data can be checked if it is modified or not
+- confidentiality:              
+- authentication                
+- authorization                 
+- non-repetition            
+                           
+Usage:                    
+---------                
+- To know all the options in 'openssl version'
+
+opensssl version --help  
+
+- To know all the 'standard' commands            
+
+openssl help       
+ 
+- To create 'sha256' of any file, first create any file 
+
+openssl sha256 -hex -out file.sha256 file
