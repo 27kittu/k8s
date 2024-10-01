@@ -1,5 +1,0 @@
-#!/bin/bash
-
-git config user.name '27kittu'
-git config user.email 'cv27.one@gmai.com'
-
