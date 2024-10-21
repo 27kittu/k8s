@@ -1,8 +1,6 @@
-. git_configure
-
-#curl -skSL https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/v4.8.0/deploy/install-driver.sh | bash -s v4.8.0 -- #NFS CSI driver v4.8.0
 #kubectl -n kube-system get pod -o wide -l app=csi-nfs-controller
 #kubectl -n kube-system get pod -o wide -l app=csi-nfs-node
 
-ssh root@172.30.2.2 'mkdir /mnt/nfsvol && chown nobody:nogroup -R /mnt/nfsvol && chmod 755 -R /mnt/nfsvol'
-kubectl apply -f randomExperiments/0all.yaml -f randomExperiments/0pvc.yaml -f 0KOStorageClass/0sc1.yaml
+ssh root@172.30.2.2 'apt update -y && apt install nfs-kernel-server -y && mkdir /mnt/nfs_share && chown nobody:nogroup -R /mnt/nfs_share && chmod 755 -R /mnt/nfs_share && echo "/mnt/nfs_share *(rw,sync,no_subtree_check,no_root_squash)" >> /etc/exports && exportfs -rav &&  systemctl start nfs-server rpcbind && systemctl enable nfs-server rpcbind'
+#apt install nfs-common -y && showmount -e 172.30.2.2 && sudo mount -t nfs -o nfsvers=4.1 172.30.2.2:/mnt/nfs_share /mnt' 
+#kubectl apply -f randomExperiments/0all.yaml -f randomExperiments/0pvc.yaml -f 0KOStorageClass/0sc1.yaml

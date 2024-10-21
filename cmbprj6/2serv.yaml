@@ -3,10 +3,9 @@ kind: Service
 metadata:
   name: app-serv1
   namespace: ts
-kind:
+spec:
   type: NodePort #ClusterIP, LoadBalancer
   selector:
-    matchLabels:
       app_name: mithun-app
   ports:
     - targetPort: tomcp

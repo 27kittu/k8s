@@ -6,7 +6,7 @@ provisioner: nfs.csi.k8s.io
 reclaimPolicy: Retain
 parameters:
   server: 172.30.2.2
-  share: /mnt/nfsvol
+  share: /mnt/nfs_share
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
