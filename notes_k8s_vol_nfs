@@ -1,0 +1,44 @@
+- Create an NFS server that can be used for 'StorageClass' to create volumes
+
+- First, install a few packages in NFS server
+
+'sudo apt install -y'
+'sudo apt install nfs-kernel-server -y'
+
+- configure 'NFS share directory' or 'NFS export directory'
+'sudo mkdir -p /mnt/nfs_share'
+
+- Now configuring the folder and file level privileges
+'sudo chown -R nobody:nogroup /mnt/nfs_share'
+'sudo chmod -R 777 /mnt/nfs_share'
+
+- Now, we have to configure permissions to access the share to file-system to the clients in '/etc/exports'
+'vim /etc/exports'
+
+in the above file, we can give permissions to the servers who are permitted to use the file system by mentioning the details
+
+/mnt/share <ip_address-of -client either range/ip_address/public/private/*>(rw,sync,no_subtree_check,no_root_squash)
+
+mention above and save.
+
+- Now restart the after exporting the changes
+'sudo exportfs -a'
+
+- restart the process 'nfs'
+'sudo systemctl restart nfs-kernel-server'
+
+
+- In client server, we have to install other packages
+
+'sudo apt install nfs-common -y'
+
+- After installation, check if nfs-server  connects /mnt
+
+'sudo mount -t nfs -o nfsvers=4.1 172.30.2.2:/mnt/nfsvol /mnt'
+
+- From the client machine, try to view the exports available on the server:
+
+'showmount -e 172.30.2.2'
+
+
+
