@@ -9,4 +9,4 @@ parameters:
   share: /mnt/nfsvol
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsVers==4.1
+  - nfsvers=4.1
