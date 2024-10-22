@@ -1,10 +1,10 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: app1-sset
   namespace: ts
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app_name: mithun-app
@@ -29,6 +29,7 @@ spec:
         
         - name: mongoc
           image: mongo
+          ports:
             - name: mongop
               containerPort: 27017
           env:
@@ -37,7 +38,7 @@ spec:
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: mongopass
           volumeMounts:
-            - name: nfs-vol1
+            - name: mongovol1 
               mountPath: /data/db
   
   volumeClaimTemplates:
@@ -59,7 +60,7 @@ metadata:
 spec:
   selector: 
     app_name: mithun-app
-  clusterIP: none
+  clusterIP: None
   ports:
     - targetPort: tomcp
       port: 80
