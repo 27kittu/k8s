@@ -5,7 +5,7 @@ metadata:
   name: app-dep1
   namespace: ts
 spec:
-  replicas: 2
+  replicas: 1 
   strategy:
     type: Recreate
   selector:
@@ -29,6 +29,13 @@ spec:
               value: mongopass
             - name: MONGO_DB_HOSTNAME
               value: mongoc
+          resources:
+            requests:
+              cpu:  "180m"
+              memory: "15Mi"
+            limits:
+              cpu: "200m"
+              memory: "20Mi"
 
         - name: mongoc
           image: mongo
@@ -40,12 +47,22 @@ spec:
               value: muser
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: mongopass
+          resources:
+            requests:
+              cpu:  "180m"
+              memory: "15Mi"
+            limits:
+              cpu: "200m"
+              memory: "20Mi"      
           volumeMounts:
             - name: nfs-vol1
               mountPath: /data/db
 
       volumes:
         - name: nfs-vol1
-          persistentVolumeClaim:
-            claimName: pvc1
+          #persistentVolumeClaim:
+          #  claimName: pvc1
+          hostPath:
+            path: /home/garuda/space
+            type: DirectoryOrCreate
 ...
