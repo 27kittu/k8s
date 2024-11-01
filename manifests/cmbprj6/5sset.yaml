@@ -26,7 +26,13 @@ spec:
               value: mongopass
             - name: MONGO_DB_HOSTNAME
               value: mongoc
-        
+          resources:
+            requests:
+              cpu: "4m"
+              memory: "255Mi"
+            limits:
+              cpu: "5m"
+              memory: "265Mi"
         - name: mongoc
           image: mongo
           ports:
@@ -37,6 +43,13 @@ spec:
               value: muser
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: mongopass
+          resources:
+            requests:
+              cpu: "4m"
+              memory: "255Mi"
+            limits:
+              cpu: "5m"
+              memory: "265Mi"
           volumeMounts:
             - name: mongovol1 
               mountPath: /data/db

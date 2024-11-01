@@ -60,9 +60,9 @@ spec:
 
       volumes:
         - name: nfs-vol1
-          #persistentVolumeClaim:
-          #  claimName: pvc1
-          hostPath:
-            path: /home/garuda/space
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: pvc1
+          #hostPath:
+          #  path: /home/garuda/space
+          #  type: DirectoryOrCreate
 ...
