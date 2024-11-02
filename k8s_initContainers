@@ -1,0 +1,18 @@
+- init containers have utilities and setup scripts that are not in an app image
+
+- Init containers are specified alongside normal containers in the 'containers' array
+
+- there are other containers called 'sidecar' containers which start before main application containers and continue to run along with main application containers But, init containers only run till the main application containers start
+
+- init containers are run to completion.Restarted repeatedly by kubelet if the init container has issues to start until it starts
+
+- we can add as many init containers as we want with an array field 'initContainers' as a sibling to 'containers' in the pod specification
+
+- Kubelet starts running all the init containers sequentially and  then starts running 'application containers'
+
+- DIFFERENCES TO SIDECAR CONTAINERS:	
+init containers will not support any type of probes, lifecycle whereas 'Sidecar containers' do as 'app containers'
+
+- Init containers share the same resources (CPU, memory, network) with the main application containers but use shared volumes for data exchange
+
+`
