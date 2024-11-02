@@ -6,8 +6,7 @@ metadata:
 data:
   script_file: |
     #!/bin/bash
-    apk add docker
-    
+    apk add docker openssl
     docker build -t heartocean/docom:11a -f pro1_dockerfile_for_kub
-    echo "$(cat /space/secret_vol1)" | docker login -u heartocean --password-stdin
+    echo "$(cat /space/secret_vol1) | openssl base64 -d " | docker login -u heartocean --password-stdin
     docker push 
