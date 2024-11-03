@@ -1,8 +1,3 @@
-apiVersion: v1
-kind: Namespace
-metadata: 
-  name: ts
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,17 +42,3 @@ spec:
         - name: vol1
           persistentVolumeClaim:
             claimName: pvclaim1 
---- 
-apiVersion: v1
-kind: Service
-metadata:
-  name: serv1
-  namespace: ts
-spec:
-  type: NodePort
-  selector:
-    app: demo-app1
-  ports:
-    - targetPort: tomcp
-      port: 80
-      nodePort: 30000

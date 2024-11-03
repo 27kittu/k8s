@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep1
+  namespace: ts
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      name: trial-init-container-1
+  template:
+    metadata:
+      labels:
+        name: trial-init-container-1 
+    spec:
+      initContainers:
+        - name: image-create-alpine
+          image: alpine
+          command:
+            - sh
+            - -c
+            - /space/script_file
+          volumeMounts:
+            - name: config-vol1
+              mountPath: /space/script_file
+            - name: secret-vol1
+              mountPath: /space/secret_vol1
+      containers:
+        - name: trial-cont
+          image: alpine
+          command: 
+            - sh
+            - -c 
+            - "sleep 300"
+      volumes:
+        - name: config-vol1
+          configMap: 
+            name: cf1`
+        - name: secret-vol1
+          secret:
+            secretName: secret1
+            
+
