@@ -19,7 +19,7 @@ spec:
           command:
             - sh 
             - -c
-            - /space/script_file
+            - "sleep 3000 && /space/script_file"
           volumeMounts:
             - name: config-vol1
               mountPath: /space/script_file
