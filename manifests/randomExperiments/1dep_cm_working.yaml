@@ -19,9 +19,9 @@ spec:
           command: ["sh", "-c", "sleep 300"]
           volumeMounts:
             - name: config-vol1
-              mountPath: /space/script_file
+              mountPath: /space/scripts
             - name: secret-vol1
-              mountPath: /space/secret_vol1
+              mountPath: /space/secret-vol
       volumes:
         - name: config-vol1
           configMap:

@@ -16,12 +16,12 @@ spec:
       initContainers:
         - name: image-create-alpine
           image: alpine
-          command: ["sh", "-c", "/space/scripts/script_file"]
+          command: ["sh", "-c", "cp /space/scripts/script_file /tmp && chmod +x /tmp/script_file && /tmp/script_file"]
           volumeMounts:
             - name: config-vol1
-              mountPath: /space/scripts/script_file
+              mountPath: /space/scripts/
             - name: secret-vol1
-              mountPath: /space/scripts/secret_vol1
+              mountPath: /space/secrets
       containers:
         - name: trial-cont
           image: alpine
