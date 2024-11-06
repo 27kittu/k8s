@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sec-basic-auth
+  namespace: ts
+type: kubernetes.io/ssh-auth
+data:
+  ssh-privatekey: | 
+    LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFy                                                                                                                        [14/329]
+    WlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFB                                                                                                                                
+    QUJCQUJGazE5bApYaGJMd002cTJLSjVHeEFBQUFFQUFBQUFFQUFBR1hBQUFBQjNO                                                                                                                                
+    emFDMXljMkVBQUFBREFRQUJBQUFCZ1FETGtRMGdscENBCmhiYUdxRjllckNTWXla                               
+    YVNRdzU2Y3loVFhFM0VKNktzby9WQ25kSFlNRVZmckdjNzFlbE51S2pCdW5xMEFr                               
+    RWJHSnRYOSsKaFM1M0NraFNzNXJUaVdqV2VkVW1TRTNjWGpDcTRWdVBMc3BVMnBN                               
+    a284RFZsNEoraG5iczNUdE4zVTRKUm10bUs2b0pUbQo2eUtQdWtKS3VXbkMxbXpD                               
+    T1A1L2NSRTRDNFFhc3dSaW8rS1U2dmRkY3d0ejhqNUNoOUR5N25pQldGd3RWOUR4                               
+    MHVZVnZ3CmRZSUoxcWd6eDNTSUxkK0RsZ25lTzJHTHV1VzkybDltT3RMRFJZZ1dw                               
+    NHFERGRKTFpjL2dSakRhZDNXeU5EZTNXTFhwM3IKS2NJQkVoeDRzV0VIRzhHSVZZ                               
+    dVgvR3R3bnlDTzVvSktQQWY0cG5LMGxDYlN5M1NrK28rNUVDaVd5WFlJNzcrYTIr                               
+    Y0V0aQp3bEttYytXQzd1cU5SdUlWV2luZWx4WlBjK0t4Y0gxKzN4OHNWUGg0ZFpq                               
+    d3Z6Mi90c21xdEhkRWpsemZaM0RITFlGeGl5CkxSWEpxYmE3alZod1JSSitwejlP                               
+    Q1oyMThPcForL2g2QzdFeGZpTURnWDlFT3prK1JhQzhFRnpMOWdrZjY3OXVwLzFS                               
+    cEIKcDhIdjFkRzgrNVRiTUFBQVdRK2ZabVdWVXJYZzV0RUJVZDNRYjFvaTZKQmNo                               
+    VkxBb2VNMWhqaWFRWnhSNGR0YVI1NDBaVQpsTXFRckpobFN2WFozRHh2NFRqKzda
+    LzMzOXJvNk1xSFU3NGthOUNpZVVCNG5DdXRnbnJSb2Q1TnBaMy9qTHJuVStDRmdn
+    CmhFemRwb1RpWm11S01YaHVOWm9oa2VVZnBNMlFLMmVMWGNsZGhYT3VnRlZ5MEVL
+    VVZYVGdteC91TEk4N0g1NnAxV3ZKN0kKbjVOVzlsMGgwRmtrelAyU3BWMEtqU3hi
+    ZUZTYmFQODd3NzJTVHNVaUdISW5mNmNuNHhzZzVrSDNRTExMbit3RVJBR2dBeAoy
+    TkQxcHdlYldJdFNad2R0WkxaQU9DbEpRV3A4Tkc5YWN2STNoN0NYcjI0MkNsTUQ0
+    TVN0aHVYempnTnJ4UVBzeU8zelltCkRXdlpsbkpDd2ZXc2h2OVBzbkNxWjk1YzdG
+    ZmFSeVhQSGJJZUxGV0wwY1FTd2RNMW5CRGhnS0drL0g3dGw2aU1XTVlJQXkKUERP
+    ZGt2QVJvUk5LenRXanVWbEdPOG9UT2JXWkhpZkdwd0xOVnBzeDFKVWJPajhIZ2wy
+    eGQ0SEdWMC9TK3RPZU9tSUZHMQp0NGhuakt1UTVVbUFIQVdXbVpNQ0pPQ3NEOXZQ
+    R0JoSkZnWHRpam04VlU3TEtQZnk3aE9ZUGpiTk9QdEdxZ2FSZDZUUUE2CnNBblNT
+    cnBkQ0YvTVYyS3Jac3phcUh4SzJMRXUwRmllZGFFNXNPSjkrNGpkR1AwaTdmV2Yv
+    bWVOUzRRei9nUmdVZVRBWUYKWStxL290ZkE4STlpN1g5WTN0c1hBc1NuTGN3UGtJ
+    TVRBZFQrbWIzZC93UDFHdWZZdHlMNm5VOXkwWFAwM0RCRVk0UnBoMwpBcFY5cm1o
+    RWtxK0ZKM2hQcC9Oc01xcHRqNmdxR2NhUytlWHFqdDA3d1NuNlI3YlpCOXJOU3pk
+    SVltdFZhUXE1V2Q0bjlrCmN4cStMc1F1Vkg2cDJyQW5Zd1BwdnlFNVd5U1RMSFlk                                
+    T2duS08rdUZOMkczY2c1RDQ5SWtXOW53Ny9kOWVTbHZWeko5UnMKYS9qSUFPUmxI                                
+    aHBzdmcyM2JYV25BcFF2clBGMUl4b3huWUpWWDlDbFQ1ck9MQlc4aU9xdVFCbnp2                                
+    bzNMbGNGdm45ajBRLwpMUDJsRHhzRGdlaE5wMTV3R2dRNzAzQU90cTBGTC84MWVS                                
+    bU9RbTBJQzE5cmVHQkdpcTZVNXhieDRWaUJnbXg3aXgzTWFVCmZkS3RnMlk3YjVT                                
+    a0srZUo2OTVuVHhPaWFLcHpONGlpdm9EVW0xVlVTUWhhUE9vM1lLeStIM2ZCczdM                                
+    aWRsT1VGb2gxOCsKdnJLZFg3YVYvblduWURSN09rSEZwWlVKSHViWFN6SVRIZk0z                                
+    bEVLVUJNWmJvWEpRN1kyNVltSzJRYnlsdWRPcE9oZmwxWQpXMFFhRndhRjlnbW5B                                
+    NnVzM2Z6MmduTk11S2ZEYzlWL1E2dkxpOHQyUklpZjBSbUhRZjdYOXhMN1ZJWWU0                                
+    dHNGNGVuL2dlCmRpbW91UUVqUUNwNXc1YldxRW9jbUJHcU9vdkM1Q0VvSWxydExz                                
+    bmNWY0RLUkRKZjdCSy8rSCtxbUZkUjQ3YTNqYXJGWkwKZUV3QVJBNTZOSmh0amJC                                
+    VHhzQkpCdkMvejlFNjBDZ2E4Nk54M3FWZ2EwREh0WXk1aWcxbXNyQ2RCZGpwVk1h                                
+    VVBlL01DTgpJRTVielp4Sk9qcCtXQWdEbHUvNEFGb0IzMTVRMEdiQ1JRRGFJeFpK    
+    TS9DV0thQkI5YlNoYi8wZXlrOE9xY1lKelA0MlkrCll4N3c5VVNIazIzSzNDUGdm                                
+    N1cxWDZ6YVE0aXBvSXhGK2xyRHJFREllK2x5cVg1d2x3RW9WcTNJcGcwR2czVXFw                                
+    ZW5aMFAKQXdrb3hwSkdERzk5UmpScXFwMGtid2tyNlZ5SnhLVTkxZHRjWFhYOXJh                                
+    M3N4Y284NmNlU1FwWjVlajRPZjY1T2RxTHl5Zgo2Vlg4YzU2UjcwNlZRb1lqZ2JJ                                
+    dGlaMkdjQW5uZ1E0d0wxanlhZ052MGJUVUNEdlB1djEzMUU3aW9kVDVBRWtocmM3                                
+    QjQ0CjJRdS8veFJXMW9JVHNqZGpFcDZxcUtvOFlid0t2Y0Y5NXg4ZGFadEZrSm5k                                
+    cEZweWE1eE5vR2lPQURMQ0xTTUJvNWZ5cWEKMzY3NTVNQmxXVUNxNmRDTFE1Z05Y                                
+    S3pVK2Ryb20vQzYrWi92ZStZbWFnb2xEUnJndThHdUpjOGZIaDREYTBsYzFBOEJC                                
+    aApRS0drejRNZnhxRHZYZm1QWTFSRXcwYW4zbzhENGNET2lGTnUzMHBhb1FWWHFU                                
+    S3JaK0I1MFBueEJyWGNiMU9kdkR2Z3g2ClZmYnZuWW1yb2w1anl0MmZ4ckd2SWlF                                
+    cmZOSHhtM2N1MStoVHo4elBNaUkzc2JxUlo1ZTRMZXJ3SHM5WE9zMmJhUk5WRHYK                                
+    RUF6NHlBRENKODBSWmQ4c0pzZDFVYUxrRDI4PQotLS0tLUVORCBPUEVOU1NIIFBS                                
+    SVZBVEUgS0VZLS0tLS0KCg== 
