@@ -11,13 +11,23 @@ spec:
       image: bitnami/kaniko
       args:
         - "--dockerfile=/space/volmount/maven-web-application/pro1_dockerfile_for_kub"
-        - "--context= /space/volmount/maven-web-application/"
+        - "--context=/space/volmount/maven-web-application/"
         - "--destination=heartocean/docom:kj11b"
       volumeMounts:
         - name:  vol1
-          mountPath: /space/volmount
+          mountPath: /workspace/volmount
+        - name: vol2
+          mountPath: /workspace
+    - name: busyboxc
+      image: busybox
+      command: ["sh","-c","sleep 300"]
+      volumeMounts:
+        - name: vol2
+          mountPath: /workspace
   volumes:
     - name: vol1
       hostPath: 
         path: /root/maven-web-application
         type: Directory
+    - name: vol2
+      emptyDir: {}
