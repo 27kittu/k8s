@@ -1,4 +1,13 @@
 apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOnsidXNlcm5hbWUiOiJoZWFydG9jZWFuIiwicGFzc3dvcmQiOiJoZWFydG9jZWFuQGRvY2tlciIsImVtYWlsIjoiY3YyNy5vbmVAZ21haWwuY29tIiwiYXV0aCI6ImFHVmhjblJ2WTJWaGJqcG9aV0Z5ZEc5alpXRnVRR1J2WTJ0bGNnPT0ifX19
+kind: Secret
+metadata:
+  name: docker-credentials
+  namespace: ts
+type: kubernetes.io/dockerconfigjson
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: pod1
@@ -7,27 +16,36 @@ metadata:
     name: kaniko-pod
 spec:
   containers:
-    - name: kanikopod
+    - name: kanikoc
       image: bitnami/kaniko
       args:
-        - "--dockerfile=/space/volmount/maven-web-application/pro1_dockerfile_for_kub"
-        - "--context=/space/volmount/maven-web-application/"
+        - "--dockerfile=/workspace/volmount/maven-web-application/pro1_dockerfile_for_kub"
+        - "--context=/workspace/volmount/maven-web-application/"
         - "--destination=heartocean/docom:kj11b"
       volumeMounts:
         - name:  vol1
           mountPath: /workspace/volmount
         - name: vol2
           mountPath: /workspace
+        - name: vol3
+          mountPath: /kaniko/.docker
     - name: busyboxc
       image: busybox
       command: ["sh","-c","sleep 300"]
       volumeMounts:
+        - name: vol1
+          mountPath: /workspace/volmount
         - name: vol2
           mountPath: /workspace
+        - name: vol3
+          mountPath: /workspace/configs
   volumes:
     - name: vol1
-      hostPath: 
-        path: /root/maven-web-application
-        type: Directory
+      nfs:
+        server: 172.30.2.2
+        path: /mnt/nfs_share/
     - name: vol2
       emptyDir: {}
+    - name: vol3
+      secret:
+        secretName: docker-credentials
