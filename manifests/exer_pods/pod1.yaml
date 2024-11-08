@@ -29,8 +29,8 @@ spec:
           mountPath: /workspace
         - name: vol3
           mountPath: /kaniko/.docker
-    - name: busyboxc
-      image: busybox
+    - name: docker 
+      image: docker
       command: ["sh","-c","sleep 300"]
       volumeMounts:
         - name: vol1
