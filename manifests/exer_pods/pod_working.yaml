@@ -1,0 +1,39 @@
+apiVersion: v1                                                                                                                         
+data:                                                                                                                                  
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOnsidXNlcm5hbWUiOiJoZWFydG9jZWFuIiwicGFzc3dvcmQiOiJoZWFydG9jZW
+FuQGRvY2tlciIsImF1dGgiOiJhR1ZoY25SdlkyVmhianBvWldGeWRHOWpaV0Z1UUdSdlkydGxjZz09In19fQ==                                                 
+kind: Secret                                                                                                                           
+metadata:                                                                                                                              
+  name: docker-credentials                                                                                                             
+  namespace: ts                                                                                                                        
+type: kubernetes.io/dockerconfigjson                                                                                                   
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+  namespace: ts
+spec:
+  containers: 
+    - name: c1
+      image: bitnami/kaniko
+      args:
+        - "--dockerfile=/space/files/maven-web-application/pro1_dockerfile_for_kub"
+        - "--context=/space/files/maven-web-application/"
+        - "--destination=heartocean/docom:new1"
+      volumeMounts:
+        - name: v1
+          mountPath: /kaniko/.docker
+        - name: v2
+          mountPath: /space/files/
+  volumes:
+    - name: v1
+      secret:
+        secretName: docker-credentials
+        items:
+          - key: .dockerconfigjson
+            path: config.json
+    - name: v2
+      nfs:
+        server: 172.31.11.98
+        path: /mnt/nfs_share/
