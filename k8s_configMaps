@@ -1,0 +1,10 @@
+ConfigMaps:
+------------
+
+IMPORTANT:
+----------
+- By default, Kubernetes mounts ConfigMaps as read-only preventing  changes, like setting executable permissions, directly within the mounted location 
+
+- Config maps are used to save non-confidential data in the form of key-value pairs or normal scripts to run on machines
+
+- Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.

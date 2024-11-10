@@ -1,0 +1,4 @@
+- To know the logs of the failed container of a pod
+
+kubectl logs <pod_name> -c <containerNameFromManifestFile> -n <ns>
+

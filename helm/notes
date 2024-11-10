@@ -1,0 +1,7 @@
+helm: 
+-----
+- is a package manager for kubernetes inorder to download, maintain version control and install packages with many number of dependent or independent manifest files
+
+- helm simplifies installing an entire application with many manifest files using a single helm chart
+
+
