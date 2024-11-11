@@ -1,0 +1,1 @@
+0_k8sHEADSUP: title: do we have to mount the secret to the initcontainer, if so what is the use of service account? 

@@ -1,3 +1,11 @@
+- Worked on 'Init Containers' for 4-5 days
+  - errors like docker config file authentication errors
+      the error was due to misconfiguration of secret file inside the volumes
+  - errors during running of Dockerfile:
+    errors arised due to 'settings.xml' file inside the container which has previously configured with old server ip addresses
+  - errors during the running of Dockerfile:
+    errors happend due to use of outdated tomcat version 
+-----------------------------------
 ubuntu@ip-172-31-95-202:~/mithun/manifest_files/new_exer_1$ kubectl describe pods pod2 -n ts
 Name:             pod2
 Namespace:        ts

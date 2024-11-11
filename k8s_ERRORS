@@ -1,7 +1,0 @@
-- Worked on 'Init Containers' for 4-5 days
-  - errors like docker config file authentication errors
-      the error was due to misconfiguration of secret file inside the volumes
-  - errors during running of Dockerfile:
-    errors arised due to 'settings.xml' file inside the container which has previously configured with old server ip addresses
-  - errors during the running of Dockerfile:
-    errors happend due to use of outdated tomcat version 
