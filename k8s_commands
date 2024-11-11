@@ -2,3 +2,24 @@
 
 kubectl logs <pod_name> -c <containerNameFromManifestFile> -n <ns>
 
+- To create a 'Secret' from command using cli to a yaml file
+
+ubuntu@ip-172-31-10-219:~$ kubectl create secret docker-registry docker-credentials \
+> --docker-server=https://index.docker.io/v1/ \
+> --docker-username=heartocean \
+> --docker-password=heartocean@docker \
+> --docker-email=cv27.one@gmail.com \
+> --namespace=ts \
+> --dry-run=client -o yaml 
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOnsidXNlcm5hbWUiOiJoZWFydG9jZWFuIiwicGFzc3dvcmQiOiJoZWFydG9jZWFuQGRvY2tlciIsImVtYWlsIjoiY3YyNy5vbmVAZ21haWwuY29tIiwiYXV0aCI6ImFHVmhjblJ2WTJWaGJqcG9aV0Z5ZEc5alpXRnVRR1J2WTJ0bGNnPT0ifX19
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: docker-credentials
+  namespace: ts
+type: kubernetes.io/dockerconfigjson
+
+
+In the above command, we can also redirect the code to file by adding '> docker-credentials.yaml' following '--dry-run=client -o yaml'
