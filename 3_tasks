@@ -1,12 +1,1 @@
-8-11-2024:
-----------
-- Learned to create secrets using the kubectl and converting them to yaml manifest files
 
-10-11-2024:
------------
-- Learned to create images using kaniko containers
-- Created service account
-
-11-11-2024:
------------
-- attempted to use service account using 'imagePullSecrets' 
