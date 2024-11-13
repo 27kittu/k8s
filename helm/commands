@@ -1,0 +1,32 @@
+- To create a helm chart
+
+helm create <chart_name>
+
+- To install the chart
+
+helm install <deployment_configuration_Name/ReleaseName> <Chart/DirectoryName>
+
+deployment_name here is the configuration specified in the chart. If we change the configuration, we have to again change the name of the deployment and install
+
+- To list all the charts which are deployed
+
+helm list -a	# -a flag shows all the deployed charts in the current namespace
+
+helm list -A 	# -A flag shows all the deployed charts in all the namespaces
+
+- To uninstall the chart,
+
+helm uninstall <deployment_Configuration_Name/ReleaseName>
+
+- To rollback the release to the previous release
+
+helm rollback <release_name> <revision_Number>
+
+- To know all the details with which the chart is being built
+
+helm template <helm_chart/directory>
+
+
+55:30
+
+
