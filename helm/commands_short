@@ -1,3 +1,62 @@
+helm completion bash: For command completion script
+
+helm create <chartName>: To create a new chart
+
+helm dependency build:
+helm dependency list
+helm dependency update 
+
+helm env <environment_variables>: set any env variable
+
+helm get all <releaseName>: get manifest for present release
+helm get hooks
+helm get manifest
+helm get notes
+helm get values <releaseName>: 
+
+helm help: get help for each command
+
+helm history <releaseName>: Display all details of release of chart
+
+helm install <releaseName> <chart>: Install a chart
+
+helm lint <chartName>: Correct indentation and others in a chart
+
+helm list <chartName>: List all the releases of a chart
+
+helm package <chartName>: pack a chart dir in local to '.tgz' file
+
+helm plugin install
+helm plugin list
+helm plugin uninstall
+helm plugin update 
+
+helm pull
+
+helm push
+
+helm registry
+
+helm repo 
+helm rollback
+helm search
+helm search
+
+helm show all
+helm show chart
+helm show crds
+helm show readme
+helm show values
+
+helm status <releaseName>
+helm template <releaseName> <chartName>
+helm test <releaseName>
+helm uninstall <releaseName>
+helm upgrade <releaseName>
+helm verify: 
+helm version: Know the current helm version 
+OFFICIAL HELP:
+-------------------
 The Kubernetes package manager
 
 Common actions for Helm:
@@ -93,3 +152,6 @@ Flags:
       --repository-config string    path to the file containing repository names and URLs (default "/home/ubuntu/.config/helm/repositories.yaml")
 
 Use "helm [command] --help" for more information about a command.
+
+
+
