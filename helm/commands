@@ -26,7 +26,10 @@ helm rollback <release_name> <revision_Number>
 
 helm template <helm_chart/directory>
 
+- To verify the misconfiguration associated with chart 
 
-55:30
+helm lint <helmChart>
 
+- To uninstall/delete the k8s objects using the helm chart
 
+helm uninstall <helmChart> 

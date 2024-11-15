@@ -1,3 +1,4 @@
+-----------------------------------
 - Worked on 'Init Containers' for 4-5 days
   - errors like docker config file authentication errors
       the error was due to misconfiguration of secret file inside the volumes
@@ -5,6 +6,7 @@
     errors arised due to 'settings.xml' file inside the container which has previously configured with old server ip addresses
   - errors during the running of Dockerfile:
     errors happend due to use of outdated tomcat version 
+===================================
 -----------------------------------
 ubuntu@ip-172-31-95-202:~/mithun/manifest_files/new_exer_1$ kubectl describe pods pod2 -n ts
 Name:             pod2
@@ -70,7 +72,7 @@ Events:
 - the above error is due to only one master node but has no child nodes in the cluster and due to taint in the 'master node', it stopeed creating the pod.
 
 -------------
-
+===================================
 
 ubuntu@ip-172-31-95-202:~/mithun/manifest_files/new_exer_1$ kubectl describe svc tomserv -n ts
 Name:              tomserv
@@ -91,7 +93,7 @@ Events:            <none>
 
 - there is no endpoints, I have mistakenly written wrong selector
 ---------------
-
+====================================
 
 ubuntu@ip-172-31-95-202:~/mithun/manifest_files/new_exer_1$ kubectl apply -f serv_nodeport_1.yaml
 pod/t1 created
@@ -101,12 +103,11 @@ The Service "tserv" is invalid: spec.ports[0].nodePort: Invalid value: 80: provi
 - I have allotted 80, but the nodeport range is 30000-32767
 
 -----------
-
 If the pod is assigned with a 'ClusterIP' using a 'Service', it is to be checked in the node in which it was hosted.
 
 wasted much time checking in the master node as it was not known to check in the worker node in which it was hosted.
 ----------
-
+===================================
 
 ubuntu@ip-172-31-58-170:/var/lib/jenkins/workspace/k8s_pipe1$ sudo su jenkins
 jenkins@ip-172-31-58-170:~/workspace/k8s_pipe1$ kubectl
@@ -122,6 +123,18 @@ sudo chown jenkins:jenkins -R /var/lib/jenkins/.kube/
 - Install 'Kubectl' software to jenkins use it and make changes in the 'master node' of the k8s cluster.
 
 
-----------
+--------------------------------------------------
+===================================
+ERROR:
+
+Events:
+  Type    Reason                Age                    From                         Message
+  ----    ------                ----                   ----                         -------
+  Normal  ExternalProvisioning  4m48s (x122 over 34m)  persistentvolume-controller  Waiting for a volume to be created either by the external provisioner 'ebs.csi.aws.com' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
 
 
+Solution:
+-----------
+- For now, driver is not installed. We have to install EBS driver and then look for volume provisioner.
+
+===================================
