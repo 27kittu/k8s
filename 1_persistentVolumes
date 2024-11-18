@@ -1,0 +1,11 @@
+Persistent Volumes:
+-------------------
+- Persistent Volumes retain even after the pods are deleted. 
+- Persistent Volumes are the alternatives to volumes which are deleted along with pods
+
+Procedure to connect persistent Volumes using CSI drivers are
+
+AWS-EBS: (link: https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
+--------
+- Ensure to read the CSI-EBS driver documentation for all the specifications
+- Install it using the documentation as specified in details

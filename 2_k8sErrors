@@ -138,3 +138,66 @@ Solution:
 - For now, driver is not installed. We have to install EBS driver and then look for volume provisioner.
 
 ===================================
+
+ERROR:
+
+Events:
+  Type     Reason                Age              From                                                                                      Message
+  ----     ------                ----             ----                                                                                      -------
+  Normal   ExternalProvisioning  4s (x2 over 4s)  persistentvolume-controller                                                               Waiting for a volume to be created either by the external provisioner 'ebs.csi.aws.com' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+  Normal   Provisioning          1s (x3 over 4s)  ebs.csi.aws.com_ebs-csi-controller-6ff4f57855-psbdm_e289555d-726a-4f7c-8a35-9d0f748c2c5d  External provisioner is provisioning volume for claim "ts/pvc1"
+  Warning  ProvisioningFailed    1s (x3 over 4s)  ebs.csi.aws.com_ebs-csi-controller-6ff4f57855-psbdm_e289555d-726a-4f7c-8a35-9d0f748c2c5d  failed to provision volume with StorageClass "volserver1": rpc error: code = InvalidArgument desc = Volume capabilities not supported
+
+
+Links to check:
+------------------
+https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md
+https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/multi-attach.md
+
+SOLUTION:
+---------
+- The Error occured when volume provisioning happend through EBS drivers of CSI driver Interface of k8s
+- This error happens if the drivers are not installed. Install it through link(https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md) 
+- Installation has
+1) creating a role in AWS that enables AWS to create EBS volumes on demand when the 'self Managed Cluster' wants to create
+2) Install the drivers through the link specified in the link
+
+- Specification of type of volume will depend on the volume created or not created
+If the PVC has specification with 'type' as 'io1' will not have 'AccessMode' as 'ReadWriteMany'. But Need to change to 'type' as 'io2' to get 'ReadWriteMany'
+-----------
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  csi.storage.k8s.io/fstype: xfs
+  type: io1
+  iopsPerGB: "50"
+  encrypted: "true"
+  tagSpecification_1: "key1=value1"
+  tagSpecification_2: "key2=value2"
+---------------
+
+
+
+changed the mode 'type' to 'io2' for 'AccessModes' as 'ReadWriteMany' as guided in the documentation
+(link: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/multi-attach.md)
+
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: volserver1
+provisioner: ebs.csi.aws.com #nfs.csi.k8s.io
+reclaimPolicy: Retain
+parameters:
+  csi.storage.k8s.io/fstype: xfs
+  type: io2
+  throughput: "125"
+  iopsPerGB: "50"
+  encrypted: "true"
+  tagSpecification_1: "key1=value1"
+  tagSpecification_2: "key2=value2"
+volumeBindingMode: Immediat

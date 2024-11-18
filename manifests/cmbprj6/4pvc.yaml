@@ -7,7 +7,7 @@ spec:
   storageClassName: volserver1
   resources:
     requests:
-      storage: 1Gi
-  volumeMode: Filesystem
+      storage: 6Gi
+  volumeMode: Block #Filesystem
   accessModes:
     - ReadWriteMany

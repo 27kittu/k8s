@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: app1-sset
+  namespace: ts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app_name: mithun-app
+  template:
+    metadata:
+      labels:
+        app_name: mithun-app
+    spec:
+      initContainers:
+        - name: image-create-alpine
+          image: alpine
+          command:
+            - sh 
+            - -c
+            - "sleep 3000 && /space/script_file"
+          volumeMounts:
+            - name: config-vol1
+              mountPath: /space/script_file
+            - name: secret-vol1
+              mountPath: /space/secret_vol1
+
+      containers:
+        - name: tomc
+          image: heartocean/docom:kj11
+          ports:
+            - name: tomcp
+              containerPort: 8080
+          env:
+            - name: MONGO_DB_USERNAME
+              value: muser
+            - name: MONGO_DB_PASSWORD
+              value: mongopass
+            - name: MONGO_DB_HOSTNAME
+              value: mongoc
+          resources:
+            requests:
+              cpu: "4m"
+              memory: "255Mi"
+            limits:
+              cpu: "5m"
+              memory: "265Mi"
+        - name: mongoc
+          image: mongo
+          ports:
+            - name: mongop
+              containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: muser
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: mongopass
+          resources:
+            requests:
+              cpu: "4m"
+              memory: "255Mi"
+            limits:
+              cpu: "5m"
+              memory: "265Mi"
+          volumeMounts:
+            - name: mongovol1 
+              mountPath: /data/db
+      volumes:
+        - name: config-vol1
+          configMap: 
+            name: cf1
+        - name: secret-vol1
+          secret: 
+            secretName: secret1
+
+  volumeClaimTemplates:
+    - metadata:
+        name: mongovol1
+      spec:
+        accessModes: 
+          - ReadWriteMany
+        storageClassName: volserver1
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssetserv1
+  namespace: ts
+spec:
+  selector: 
+    app_name: mithun-app
+  clusterIP: None
+  ports:
+    - targetPort: tomcp
+      port: 80

@@ -6,7 +6,8 @@ provisioner: ebs.csi.aws.com #nfs.csi.k8s.io
 reclaimPolicy: Retain
 parameters:
   csi.storage.k8s.io/fstype: xfs
-  type: io1
+  type: io2
+  throughput: "125"
   iopsPerGB: "50"
   encrypted: "true"
   tagSpecification_1: "key1=value1"
