@@ -33,3 +33,5 @@ helm lint <helmChart>
 - To uninstall/delete the k8s objects using the helm chart
 
 helm uninstall <helmChart> 
+
+

@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: sset-efs1
+  name: sset-ebs-1
   namespace: ts
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: sset-efs
+      appname: mithun-app
   template:
     metadata:
-      name: temp1
+      name: mithun-app-temp1
       labels:
-        app: sset-efs
+        appname: mithun-app
     spec:
       containers:
         - name: tomc
-          image: heartocean/docom:kj11
+          image: heartocean/docom:kaniko3
           ports:
             - name: tomcp
               containerPort: 8080
@@ -30,8 +30,7 @@ spec:
         - name: mongoc
           image: mongo
           ports:
-            - name: mongocp
-              containerPort: 27017
+            - containerPort: 27017
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               value: muser
@@ -40,27 +39,13 @@ spec:
           volumeMounts:
             - name: vol1
               mountPath: /data/db
-
   volumeClaimTemplates:
     - metadata:
         name: vol1
       spec:
-        storageClassName: volserver-efs1
+        storageClassName: storage-server-ebs
         accessModes: 
-          - ReadWriteMany
+          - ReadWriteOnce
         resources:
           requests:
-            storage: 1Gi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: svc-efs1
-  namespace: ts
-spec:
-  clusterIP: None
-  selector: 
-    app: sset-efs
-  ports:
-    - port: 80
-      targetPort: tomcp
+            storage: 4Gi

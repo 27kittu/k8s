@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sset-efs-svc1
+  namespace: ts
+spec:
+  clusterIP: None
+  selector:
+    appname: sset-efs-aws
+  ports:
+    - port: 80
+      targetPort: tomcp

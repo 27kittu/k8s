@@ -200,4 +200,14 @@ parameters:
   encrypted: "true"
   tagSpecification_1: "key1=value1"
   tagSpecification_2: "key2=value2"
-volumeBindingMode: Immediat
+volumeBindingMode: Immediate
+
+==================================
+ERROR:
+
+I have deletd all the pods of stateful set pods but still seeing all the persistent volumes in the cluster
+I came across all the PVCs which are created by previous stateful set pods are still in the cluster bin
+
+So, These are pvcs that are created with 'retainPolicy' as 'Retain' for the previous stateful set pods so they are retaining in the cluster
+
+===================================
