@@ -39,8 +39,10 @@ helm registry
 
 helm repo 
 helm rollback
-helm search
-helm search
+
+helm search repo <chartName>
+helm search hub <chartName>
+helm search hub prometheus-community -o yaml | grep 'prometheus-community'
 
 helm show all
 helm show chart

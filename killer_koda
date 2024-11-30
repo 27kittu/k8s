@@ -1,0 +1,6 @@
+#helm search hub prometheus-community -o yaml | grep 'prometheus-community'
+
+helm repo add prometheus https://prometheus-community.github.io/helm-charts 
+helm upgrade --install prom1 prometheus/kube-prometheus-stack
+kubectl patch svc prom1-kube-prometheus-stac-prometheus -p '{"spec":{"type": "NodePort"}}'
+
