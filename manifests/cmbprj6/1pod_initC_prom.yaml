@@ -1,0 +1,64 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOnsidXNlcm5hbWUiOiJoZWFydG9jZWFuIiwicGFzc3dvcmQiOiJoZWFydG9jZWFuQGRvY2tlciIsImVtYWlsIjoiY3YyNy5vbmVAZ21haWwuY29tIiwiYXV0aCI6ImFHVmhjblJ2WTJWaGJqcG9aV0Z5ZEc5alpXRnVRR1J2WTJ0bGNnPT0ifX19
+kind: Secret
+metadata:
+  name: docker-credentials
+  namespace: ts
+type: kubernetes.io/dockerconfigjson
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+  namespace: ts
+  labels: 
+    name: pod-t
+spec:
+  initContainers: 
+    - name: i1
+      image: bitnami/kaniko
+      args:
+        - "--dockerfile=/workspace/files/spring-boot-mongo-docker/dockerfile_prometheus"
+        - "--context=/workspace/files/spring-boot-mongo-docker/"
+        - "--destination=heartocean/cat:prometheus1"
+      volumeMounts:
+        - name: v1
+          mountPath: /kaniko/.docker/
+        - name: v2
+          mountPath: /workspace/files/
+  containers:
+    - name: c1
+      image: heartocean/cat:prometheus1
+      ports:
+        - name: c1p
+          containerPort: 8080
+      volumeMounts:
+        - name: v1
+          mountPath: /workspace/configs
+        - name: v2
+          mountPath: /workspace/files
+  volumes:
+    - name: v1
+      secret:
+        secretName: docker-credentials
+        items:
+          - key: .dockerconfigjson
+            path: config.json
+    - name: v2
+      hostPath:
+        path: /root/space/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kanikosvc
+  namespace: ts
+spec: 
+  type: NodePort
+  selector:
+    name: pod-t
+  ports:
+    - port: 80
+      targetPort: c1p
+      nodePort: 30000
