@@ -1,0 +1,60 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOnsidXNlcm5hbWUiOiJoZWFydG9jZWFuIiwicGFzc3dvcmQiOiJoZWFydG9jZWFuQGRvY2tlciIsImVtYWlsIjoiY3YyNy5vbmVAZ21haWwuY29tIiwiYXV0aCI6ImFHVmhjblJ2WTJWaGJqcG9aV0Z5ZEc5alpXRnVRR1J2WTJ0bGNnPT0ifX19
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: docker-credentials
+  namespace: ts
+type: kubernetes.io/dockerconfigjson
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod2
+  namespace: ts
+  labels:
+    app: prom-learn
+spec:
+  initContainers:
+    - name: i1
+      image: bitnami/kaniko
+      args:
+        - "--dockerfile=/workspace/files/spring-boot-mongo-docker/dockerfile_prometheus"
+        - "--context=/workspace/files/spring-boot-mongo-docker"
+        - "--destination=heartocean/cat:prometheus-exer1"
+      volumeMounts:
+        - name: v1-sec
+          mountPath: /kaniko/.docker/
+        - name: v2-dir
+          mountPath: /workspace/files
+  containers:
+    - name: c1
+      image: heartocean/cat:prometheus-exer1
+      ports:
+        - containerPort: 8080
+          name: c1p
+  volumes:
+    - name: v1-sec
+      secret:
+        secretName: docker-credentials
+        items:
+          - key: .dockerconfigjson 
+            path: config.json
+    - name: v2-dir
+      hostPath:
+        path: /root/space/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prom-ser1
+  namespace: ts
+spec:
+  selector: 
+    app: prom-learn
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: c1p
+      nodePort: 30000  
