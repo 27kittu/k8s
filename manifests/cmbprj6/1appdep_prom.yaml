@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-dep1
+  namespace: ts
+spec:
+  replicas: 1 
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels: 
+      app_name: mithun-app
+  template:
+    metadata:
+      labels: 
+        app_name: mithun-app
+    spec:
+      containers:
+        - name: tomc
+          image: heartocean/cat:trial1
+          ports:
+            - containerPort: 8080
+              name: tomcp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serv-prom
+  namespace: ts
+spec:
+  type: NodePort
+  selector: 
+    app_name: mithun-app
+  ports:
+    - port: 80
+      targetPort: tomcp
+      nodePort: 30000
