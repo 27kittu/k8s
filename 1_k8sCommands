@@ -2,3 +2,5 @@
 
 kubectl logs <pod_name> -c <containerNameFromManifestFile> -n <ns>
 
+- To update any small attributes in k8s real-time manifest files
+kubectl patch svc prom1-kube-prometheus-stac-prometheus -p '{"spec":{"type": "NodePort"}}'
