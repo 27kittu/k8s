@@ -1,0 +1,10 @@
+helm: 
+-----
+- is a package manager for k8s to download,version control and install packages with multiple dependent or independent manifest files
+- helm simplifies installing an entire application with multiple manifest files using a single helm chart
+
+helm chart:
+-----------
+- A Chart is a Helm package. It contains all of the resource definitions
+- A Repository is the place where charts can be collected and shared. Repository can be 'local repo' or a remote one too
+- A Release is an instance of a chart. One chart can be installed many times and each time it is installed creates a new release.

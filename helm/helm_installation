@@ -1,5 +1,0 @@
-- Install the helm as per the script available in website
-
-- Now, for helm completion
-
-(helm completion bash) > /etc/bash_completion.d/helm
