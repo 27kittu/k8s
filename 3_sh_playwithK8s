@@ -1,5 +1,5 @@
-yum-config-manager --save --setopt=kubernetes.skip_if_unavailable=true
-yum install -y vim net-tools openssh-server initscripts
+yum-config-manager --disable kubernetes && yum-config-manager --save --setopt=kubernetes.skip_if_unavailable=true
+yum install -y vim tmux net-tools openssh-server initscripts
 systemctl start sshd
 echo 'ubuntu'  | passwd root --stdin
 
@@ -10,7 +10,7 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType groovy setlocal ts=2 sts=2 sw=2 expandtab
 eof
 
-. $HOME/.vimrc
+source $HOME/.vimrc
 
 kubeadm init --apiserver-advertise-address $(hostname -i) --pod-network-cidr 10.5.0.0/16
 
@@ -19,7 +19,7 @@ cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 
 
-kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml -f ./metrics_server_components.yaml
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml # -f ./metrics_server_components.yaml
 
 # kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 # --kubelet-insecure-tls
