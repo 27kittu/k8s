@@ -1,4 +1,4 @@
-yum-config-manager --disable kubernetes && yum-config-manager --save --setopt=kubernetes.skip_if_unavailable=true
+yum-config-manager --disable kubernetes # && yum-config-manager --save --setopt=kubernetes.skip_if_unavailable=true
 yum install -y vim tmux net-tools openssh-server initscripts
 systemctl start sshd
 echo 'ubuntu'  | passwd root --stdin
