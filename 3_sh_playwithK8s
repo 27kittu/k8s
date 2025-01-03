@@ -22,8 +22,8 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 
 EOF
 
-#yum-config-manager --disable kubernetes && yum-config-manager --save --setopt=kubernetes.skip_if_unavailable=true
-yum install -y vim tmux net-tools openssh-server initscripts
+yum-config-manager --disable kubernetes #&& yum-config-manager --save --setopt=kubernetes.skip_if_unavailable=true
+yum update -y && yum install -y vim tmux net-tools openssh-server initscripts
 systemctl start sshd
 echo 'ubuntu'  | passwd root --stdin
 
