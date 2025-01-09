@@ -8,3 +8,38 @@ helm chart:
 - A Chart is a Helm package. It contains all of the resource definitions
 - A Repository is the place where charts can be collected and shared. Repository can be 'local repo' or a remote one too
 - A Release is an instance of a chart. One chart can be installed many times and each time it is installed creates a new release.
+- when you create a helm chart with name 'app1' using the below comand
+
+helm create app1
+
+
+we get contents as below
+
+app1
+-----------
+
+controlplane $ ls -R app1/
+app1/:
+Chart.yaml  prodvalues.yaml  templates  values.yaml
+
+app1/templates:
+NOTES.txt  _helpers.tpl  deployment.yaml  hpa.yaml  ingress.yaml  service.yaml  serviceaccount.yaml  tests
+
+app1/templates/tests:
+test-connection.yaml
+
+-------------
+default files are:
+-------------------
+
+charts/       :   Contains any charts on which the current chart depends
+templates/    :   Contains manifest file templates that are to be combined with values will generate and apply to K8s cluster   
+Chart.yaml    :   Contains metadata of the helm chart like name, apiVersion, description etc..,
+values.yaml   :   Contains all the default values that has to be passed to the chart 
+
+Optional files are:
+--------------------
+
+crds/         : custom resource definitions that are to be applied for above charts depend on 
+LICENSE       : A plain text file containing the license for the chart
+README.md     : A human-readable README file
