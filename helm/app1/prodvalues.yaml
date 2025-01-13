@@ -1,5 +1,0 @@
-image:
-  repository: nginx
-service:
-  type: ClusterIP
-  port: 80
