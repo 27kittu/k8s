@@ -5,12 +5,12 @@
 replicaCount: 1
 
 image:
-  repository: 
-  pullPolicy: IfNotPresent
+  repository: heartocean/cat
+  pullPolicy: IfNotPresent #Always, Never,IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "trial"
 
-imagePullSecrets: []
+imagePullSecrets: ['sec-hub']
 nameOverride: ""
 fullnameOverride: ""
 
@@ -89,15 +89,17 @@ autoscaling:
 
 # Additional volumes on the output Deployment definition.
 volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+ - name: foo
+   secret:
+     secretName: sec-hubysecret
+     items:
+       - key: .dockerconfigjson
+         path: config.json
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
+ - name: foo
+   mountPath: "/data/db"
 #   readOnly: true
 
 nodeSelector: {}

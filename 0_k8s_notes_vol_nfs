@@ -39,6 +39,3 @@ mention above and save.
 - From the client machine, try to view the exports available on the server:
 
 'showmount -e 172.30.2.2'
-
-
-
