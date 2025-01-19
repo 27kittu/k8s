@@ -2,6 +2,8 @@ image:
   repository: heartocean/cat
   tag: "trial1"
 
+imagePullSecrets: ['docker-credentials']
+
 volumes:
   - name: vol1
     secret: 
