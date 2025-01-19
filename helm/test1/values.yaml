@@ -10,7 +10,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "trial"
 
-imagePullSecrets: ['sec-hub']
+imagePullSecrets: ['docker-credentials']
 nameOverride: ""
 fullnameOverride: ""
 
@@ -88,7 +88,7 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes: []
+volumes: 
  - name: foo
    secret:
      secretName: sec-hubysecret
@@ -97,7 +97,7 @@ volumes: []
          path: config.json
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
+volumeMounts: 
  - name: foo
    mountPath: "/data/db"
 #   readOnly: true
