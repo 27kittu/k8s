@@ -1,7 +1,8 @@
 image:
-  repository: heartocean/cat:trial1
+  repository: heartocean/cat
+  tag: "trial1"
 
-volumes: []
+volumes:
   - name: vol1
     secret: 
       secretName: docker-credentials
@@ -9,7 +10,7 @@ volumes: []
         - key: .dockerconfigjson
           path: config.json
 
-volumeMounts: []
+volumeMounts: 
   - name: vol1
-    path: /home/.docker/
+    mountPath: /home/.docker/
     readonly: true
