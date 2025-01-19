@@ -4,3 +4,16 @@ kubectl logs <pod_name> -c <containerNameFromManifestFile> -n <ns>
 
 - To update any small attributes in k8s real-time manifest files
 kubectl patch svc prom1-kube-prometheus-stac-prometheus -p '{"spec":{"type": "NodePort"}}'
+
+
+- To create a secret and forward it to a file
+
+ansible@debian:~/Documents/upstreams/k8s/helm/test1/templates$ kubectl create secret docker-registry docker-credentials \
+> --docker-username=heartocean \
+> --docker-password=heartocean@docker \
+> --docker-email=cv27.one@gmail.com \
+> --docker-server=https://index.docker.io/v1/ \
+> --namespace=ts \
+> --dry-run=client -o yaml > secret.yaml
+
+
