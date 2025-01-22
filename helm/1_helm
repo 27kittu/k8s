@@ -2,7 +2,22 @@ helm:
 -----
 - is a package manager for k8s to download,version control and install packages with multiple dependent or independent manifest files
 - helm simplifies installing an entire application with multiple manifest files using a single helm chart
+-----------------------------------
+Helm 2 VS Helm 3:
+-------------------
+Helm 3:
+-------
+- Helm 3 involves with Helm client+helm local repo, helm chart Repo(hub)  and the kubernetes cluster where helm installs apps 
+- If there are helm charts available, helm installs apps into cluster directly from hub
 
+
+Helm 2:
+--------
+- Helm 2 involves with Helm client+local repo, tiller and k8s cluster
+- Helm 2 cannot interact with k8s cluster but has a Helm software component 'tiller' which is installed and internally contacts k8s cluster
+- TIller is a component in K8s cluster and the tiller will install any apps in k8s cluster
+
+-----------------------------------
 helm chart:
 -----------
 - A Chart is a Helm package. It contains all of the resource definitions
