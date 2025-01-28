@@ -48,13 +48,15 @@ default files are:
 -------------------
 
 charts/       :   Contains any charts on which the current chart depends
-templates/    :   Contains manifest file templates that are to be combined with values will generate and apply to K8s cluster   
-Chart.yaml    :   Contains metadata of the helm chart like name, apiVersion, description etc..,
-values.yaml   :   Contains all the default values that has to be passed to the chart 
+templates/    :   Contains manifest files which use values.yaml    
+Chart.yaml    :   Has metadata of helm chart like name, apiVersion, desc.,
+values.yaml   :   Has the default values  to be passed to the chart 
 
 Optional files are:
 --------------------
 
-crds/         : custom resource definitions that are to be applied for above charts depend on 
+crds/         : custom resource definitions applied to support above charts
 LICENSE       : A plain text file containing the license for the chart
 README.md     : A human-readable README file
+
+

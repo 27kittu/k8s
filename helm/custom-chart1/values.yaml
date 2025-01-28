@@ -1,0 +1,11 @@
+replicaCount: 2
+
+image: 
+  repository: heartocean/cat
+  tag: "trial1"
+
+imagePullSecrets: ["docker-credentials"]
+
+service:
+  type: ClusterIP
+  port: 8080 

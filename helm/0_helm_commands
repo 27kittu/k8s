@@ -1,3 +1,7 @@
+ansible@debian:~/Documents/upstreams/k8s/helm$ mkdir -p customChart/{charts,templates} && touch customChart/{Chart.yaml,values.yaml} customChart/templates/{deployment.yaml,service.yaml,_helpers.tpl}
+
+
+
 - To create a helm chart
 	helm create <chart_name>
 

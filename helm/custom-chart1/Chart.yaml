@@ -1,0 +1,4 @@
+name: custom-chart1
+apiVersion: v2
+version: 0.1.0
+icon: https://example.com/path/to/icon.png
