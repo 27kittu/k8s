@@ -60,3 +60,16 @@ LICENSE       : A plain text file containing the license for the chart
 README.md     : A human-readable README file
 
 
+===================================
+HELM TEMPLATING LANGUAGE:
+--------------------------
+- Helm inorder to pass output of one template to use for another template functions, 'template' is used.
+
+value: {{ template "mytpl" . }}
+
+- Helm inorder to pass output of one template to use for another template functions and piping, 'include' is used.
+
+value: {{ include "mytpl" . | lower | quote }}
+
+
+- Inorder to use a variable value from one template to use for another template functions '
