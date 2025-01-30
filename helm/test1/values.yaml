@@ -91,7 +91,7 @@ autoscaling:
 volumes: 
  - name: foo
    secret:
-     secretName: sec-hubysecret
+     secretName: secret
      items:
        - key: .dockerconfigjson
          path: config.json
