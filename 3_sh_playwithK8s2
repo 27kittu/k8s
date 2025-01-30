@@ -18,7 +18,7 @@ eof
 source $HOME/.vimrc
 
 wget https://get.helm.sh/helm-v3.17.0-linux-amd64.tar.gz -P /opt/ \
-&& tar -xzvf helm-v3.17.0-linux-amd64.tar.gz -C /opt \ 
+&& tar -xzvf /opt/helm-v3.17.0-linux-amd64.tar.gz -C /opt \
 && mv /opt/linux-amd64/helm /usr/bin \
 && (helm completion bash)>/etc/bash_completion.d/helm
 
