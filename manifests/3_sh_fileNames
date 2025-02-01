@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+for i in $(ls -R **/*)
+do 
+if [ -f $i ] 
+then
+echo "$i"
+fi
+done

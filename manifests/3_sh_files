@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+for i in $(ls .)
+do 
+if [ -d $i ] 
+then
+cd $i
+if [ sed 
+fi
+done

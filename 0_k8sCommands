@@ -6,7 +6,7 @@ kubectl logs <pod_name> -c <containerNameFromManifestFile> -n <ns>
 kubectl patch svc prom1-kube-prometheus-stac-prometheus -p '{"spec":{"type": "NodePort"}}'
 
 
-- To create a secret and forward it to a file
+- To create a 'docker-registry' secret and forward it to a file
 
 ansible@debian:~/Documents/upstreams/k8s/helm/test1/templates$ kubectl create secret docker-registry docker-credentials \
 > --docker-username=heartocean \
@@ -16,4 +16,17 @@ ansible@debian:~/Documents/upstreams/k8s/helm/test1/templates$ kubectl create se
 > --namespace=ts \
 > --dry-run=client -o yaml > secret.yaml
 
+- To create a 'generic' secret for ssh-keys
 
+first create 'known_hosts' file
+
+ssh-keyscan github.com > known_hosts
+
+
+ansible@debian:~$ kubectl create secret generic git-ssh-key \
+> --from-file=id_rsa=~/.ssh/id_rsa2 \
+> --from-file=known_hosts=./known_hosts \
+> --namespace=ts \
+> --dry-run=client -o  yaml>~/Documents/upstreams/k8s/manifests/cmbprj2/3_kman_secret_ssh_key.yaml
+
+==========

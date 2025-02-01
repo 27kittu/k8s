@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Configmap
+metadata:
+  name: cm1
+  namespace: ts
+data:
+  Dockerfile: |
+    FROM alpine as build
+    WORKDIR /build
+    ADD git@github.com:trainyou/spring-boot-mongo-docker-pvt.git /build/
+    RUN apk add --no-cache openjdk17-jdk tar \
+    && wget -P /opt https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz \
+    && tar -xvzf /opt/apache-maven-3.9.9-bin.tar.gz -C /opt \
+    && mv /opt/apache-maven-3.9.9 /opt/maven \
+    && chmod -R 0700 /opt/maven \
+    && export PATH=$PATH:/opt/maven/bin \
+    && mvn clean validate \
+    && mvn clean test \
+    && mvn clean package 
+    
+    FROM alpine
+    WORKDIR /run
+    ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.98/bin/apache-tomcat-9.0.98.zip 
+    RUN apk add --no-cache openjdk17-jdk zip \
+    && unzip apache-tomcat-9.0.98.zip \
+    && mv apache-tomcat-9.0.98 tomcat \
+    && chmod 0700 -R tomcat
+    COPY --from=build /opt/target/spring-boot-mongo*.jar /run/tomcat/webapps/spring-boot-mongo.jar
+    EXPOSE 8080
+    ENTRYPOINT ["java", "-jar", "/run/tomcat/webapps/spring-boot-mongo.jar"]

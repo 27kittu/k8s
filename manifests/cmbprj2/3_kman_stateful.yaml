@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-sset-1
+  namespace: ts
+spec:
+  clusterIP: None
+  selector: 
+    app: app1
+  ports:
+    - targetPort: 8080
+      port: 80
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: app1-sset-1
+  namespace: ts
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      initContainers:
+        - name: i1
+          image: bitnami/kaniko
+          env:
+            - "--dockerfile=/build/Dockerfile"
+            - "--context=/build"
+            - "--destination=heartocean/cat:springbootdocker"
+          volumeMounts:
+            - name: docker-file-cm
+              mountPath: /build
+            - name: docker-credentials
+              mountPath: /root/.docker/
+            - name: ssh-key-vol
+              mountPath: /root/.ssh
+      volumes:
+        - name: docker-file-cm
+          configMap:
+            configMapName: cm1
+
+        - name: ssh-key-vol
+          secret: 
+            secretName: git-ssh-key
+            items:
+              - key: known_hosts
+                path: known_hosts
+
+              - key: id_rsa
+                path: id_rsa
+        
+        - name: docker-cred
+          secret:
+            secretName: docker-credentials
+            items:      
+              - key: .dockerconfigjson
+                path: config.json
+
+      containers:
+        - name: c1
+          image: heartocean/cat:trial1
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: vol-cl-1
+              mountPath: /data/db
+       
+  volumeClaimTemplate:
+    - metadata:
+        name: vol-cl-1
+      spec:
+        storageClassName: sc-app1
+        accessModes:  
+          - RWO
+        resources:
+          requests:
+            storage: 1Gi
