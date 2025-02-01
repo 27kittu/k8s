@@ -29,21 +29,21 @@ spec:
       initContainers:
         - name: i1
           image: bitnami/kaniko
-          env:
+          args:
             - "--dockerfile=/build/Dockerfile"
             - "--context=/build"
             - "--destination=heartocean/cat:springbootdocker"
           volumeMounts:
             - name: docker-file-cm
               mountPath: /build
-            - name: docker-credentials
+            - name: docker-cred
               mountPath: /root/.docker/
             - name: ssh-key-vol
               mountPath: /root/.ssh
       volumes:
         - name: docker-file-cm
           configMap:
-            configMapName: cm1
+            name: cm1
 
         - name: ssh-key-vol
           secret: 
@@ -71,13 +71,13 @@ spec:
             - name: vol-cl-1
               mountPath: /data/db
        
-  volumeClaimTemplate:
+  volumeClaimTemplates:
     - metadata:
         name: vol-cl-1
       spec:
         storageClassName: sc-app1
         accessModes:  
-          - RWO
+          - ReadWriteOnce
         resources:
           requests:
             storage: 1Gi
