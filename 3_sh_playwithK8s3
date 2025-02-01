@@ -5,7 +5,7 @@ sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 
 yum-config-manager --disable kubernetes #yum-config-manager --add-repo <repoName>
-yum clean all -y &&  yum install -y epel-release vim  net-tools
+yum clean all -y &&  yum install -y epel-release vim net-tools
 
 cat > $HOME/.vimrc<<eof
 syntax enable
@@ -19,8 +19,7 @@ source $HOME/.vimrc
 wget -O /etc/yum.repos.d/jenkins.repo \
     https://pkg.jenkins.io/redhat-stable/jenkins.repo
 rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
-yum upgrade
+yum update -y 
 # Add required dependencies for the jenkins package
-yum install fontconfig java-17-openjdk
-yum install jenkins
+yum install fontconfig java-17-openjdk jenkins -y
 systemctl daemon-reload
