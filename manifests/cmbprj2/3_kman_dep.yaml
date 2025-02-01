@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: app1-dep-1
+  namespace: ts
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      initContainers:
+        - name: i1
+          image: bitnami/kaniko
+          args:
+            - "--dockerfile=/build/Dockerfile"
+            - "--context=/build"
+            - "--destination=heartocean/cat:springbootdocker"
+          volumeMounts:
+            - name: docker-file-cm
+              mountPath: /build
+            - name: docker-cred
+              mountPath: /root/.docker/
+            - name: ssh-key-vol
+              mountPath: /root/.ssh
+      containers:
+        - name: c1
+          image: heartocean/cat:trial1
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: vol-cl-1
+              mountPath: /data/db
+
+      volumes:
+        - name: docker-file-cm
+          configMap:
+            name: cm1
+
+        - name: ssh-key-vol
+          secret: 
+            secretName: git-ssh-key
+            items:
+              - key: known_hosts
+                path: known_hosts
+
+              - key: id_rsa
+                path: id_rsa
+        
+        - name: docker-cred
+          secret:
+            secretName: docker-credentials
+            items:      
+              - key: .dockerconfigjson
+                path: config.json
